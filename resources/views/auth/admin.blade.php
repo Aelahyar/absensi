@@ -22,8 +22,8 @@
         </div>
         @endif
         <div class="wrap-input100 validate-input">
-            <input class="input100" type="email" name="email" required>
-            <span class="focus-input100" data-placeholder="Email address"></span>
+            <input class="input100" type="text" name="username" required>
+            <span class="focus-input100" data-placeholder="Username"></span>
         </div>
 
         <div class="wrap-input100 validate-input" data-validate="Password">

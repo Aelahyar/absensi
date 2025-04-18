@@ -41,9 +41,9 @@ return [
             'provider' => 'users',
         ],
 
-        'guru' => [
+        'admin' => [
             'driver' => 'session',
-            'provider' => 'gurus',
+            'provider' => 'admins',
         ],
 
         'user' => [
@@ -75,9 +75,9 @@ return [
             'model' => App\Models\User::class,
         ],
 
-        'gurus' => [
+        'admins' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Guru::class,
+            'model' => App\Models\Admin::class,
         ],
 
         // 'users' => [

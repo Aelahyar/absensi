@@ -12,11 +12,12 @@ class Admin extends Authenticatable
 {
 
     use HasApiTokens, HasFactory, Notifiable;
-    protected $table = 'admins';
+    protected $table = 'admin';
 
-    protected $primaryKey = 'admins';
+    protected $primaryKey = 'id_admin';
 
     protected $fillable = [
+        'id_admin',
         'nama_lengkap',
         'username',
         'password',
@@ -28,9 +29,4 @@ class Admin extends Authenticatable
     ];
 
     public $timestamps = false;
-
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-        'password' => 'hashed',
-    ];
 }
