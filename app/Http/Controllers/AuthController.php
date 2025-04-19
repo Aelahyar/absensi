@@ -13,7 +13,7 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         if(Auth::guard('user')->attempt(['email' => $request->email, 'password' => $request->password])) {
-            return redirect('/dashboard');
+            return redirect('/dashboard_user');
             // return redirect()->route('admin.dashboard');
         } else {
             return redirect('/')->with(['warning' => 'Email / Password Salah']);
@@ -40,8 +40,8 @@ class AuthController extends Controller
         // echo Hash::make($pass);
 
         if(Auth::guard('admin')->attempt(['username' => $request->username, 'password' => $request->password])) {
-            return view('admin.dashboard');
-            // return redirect()->route('admin.dashboard');
+            // return view('admin.dashboard');
+            return redirect('/dashboardadmin');
         } else {
             return redirect('/admin')->with(['warning' => 'Username / Password Salah']);
         }

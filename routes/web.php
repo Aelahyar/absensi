@@ -35,11 +35,10 @@ Route::middleware(['guest:admin'])->group(function(){
 
 Route::middleware(['auth:user'])->group(function(){
     Route::get('/logout', [AuthController::class, 'logout']);
-    Route::get('/dashboard', [DashboardController::class, 'index']);
+    Route::get('/dashboarduser', [DashboardController::class, 'index']);
 });
 
 Route::middleware(['auth:admin'])->group(function(){
     Route::get('/logoutadmin', [AuthController::class, 'logoutadmin']);
-    Route::get('/dashboard', [DashboardController::class, 'index']);
+    Route::get('/dashboardadmin', [DashboardController::class, 'index']);
 });
-

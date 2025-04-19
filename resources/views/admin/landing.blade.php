@@ -1,4 +1,3 @@
-@extends('admin.home')
 @section('content')
 <div class="page-heading">
     <div class="page-title">
