@@ -9,8 +9,7 @@
             MTs AL-ANWAR JOMBANG
         </span>
 
-
-        @php
+        {{-- @php
             $messagewarning =Session::get('warning');
         @endphp
         @if (Session::get('warning'))
@@ -20,7 +19,7 @@
                 {{ Session::get('warning') }}
             </div>
         </div>
-        @endif
+        @endif --}}
         <div class="wrap-input100 validate-input">
             <input class="input100" type="text" name="username" required>
             <span class="focus-input100" data-placeholder="Username"></span>
@@ -44,20 +43,37 @@
         </div>
     </form>
 
-    @if(session('error'))
-        <script>
-            setTimeout(() => {
-                swal("Oops!", "{{ session('error') }}", { icon: "error" });
-            }, 10);
-        </script>
+    @if(session('success'))
+    <script>
+        setTimeout(() => {
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'success',
+                title: '{{ session('success') }}',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+            });
+        }, 100);
+    </script>
     @endif
 
-    @if(session('success'))
-        <script>
-            setTimeout(() => {
-                swal("Sukses!", "{{ session('success') }}", { icon: "success" });
-            }, 10);
-        </script>
+    @if(session('warning'))
+    <script>
+        setTimeout(() => {
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'warning',
+                title: '{{ session('warning') }}',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+            });
+        }, 100);
+    </script>
     @endif
+
 
 @endsection

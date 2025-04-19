@@ -28,6 +28,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/_login/css/util.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/_login/css/main.css') }}">
     <!--===============================================================================================-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>

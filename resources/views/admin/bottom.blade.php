@@ -208,12 +208,9 @@
                                 Profile</a></li>
                         <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-gear me-2"></i>
                                 Settings</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-wallet me-2"></i>
-                                Wallet</a></li>
-                        <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="#"><i
+                        <li><a class="dropdown-item" href="/logoutadmin"><i
                                     class="icon-mid bi bi-box-arrow-left me-2"></i> Logout</a></li>
                     </ul>
                 </div>

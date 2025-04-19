@@ -41,9 +41,10 @@ class AuthController extends Controller
 
         if(Auth::guard('admin')->attempt(['username' => $request->username, 'password' => $request->password])) {
             // return view('admin.dashboard');
-            return redirect('/dashboardadmin');
+            return redirect('/dashboardadmin')->with('success', 'Berhasil login sebagai admin!');
         } else {
-            return redirect('/admin')->with(['warning' => 'Username / Password Salah']);
+            return redirect('/admin')->with('warning', 'Username / Password Salah');
+
         }
     }
 }
