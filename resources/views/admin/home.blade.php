@@ -13,6 +13,12 @@
   <link rel="stylesheet" href="{{ asset( 'assets/compiled/css/app-dark.css' ) }}">
   <link rel="stylesheet" href="{{ asset( 'assets/compiled/css/iconly.css' ) }}">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  {{-- SweetAlert --}}
+  <link rel="stylesheet" href="{{ asset('assets/extensions/sweetalert2/sweetalert2.min.css') }}">
+  {{-- DataTable --}}
+  <link rel="stylesheet" href="{{ asset('https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css') }}">
+  <link rel="stylesheet"
+      href="{{ asset('https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css') }}">
 </head>
 <body>
     <script src="{{ asset( 'assets/static/js/initTheme.js' ) }}"></script>
@@ -42,6 +48,9 @@
             </footer>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
     <script src="{{asset('assets/static/js/components/dark.js')}}"></script>
     <script src="{{asset('assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
 
@@ -50,7 +59,80 @@
     <!-- Need: Apexcharts -->
     <script src="{{asset('assets/extensions/apexcharts/apexcharts.min.js')}}"></script>
     <script src="{{asset('assets/static/js/pages/dashboard.js')}}"></script>
+    {{-- SweetAlert --}}
+    <script src="{{ asset('assets/extensions/sweetalert2/sweetalert2.min.js') }}"></script>
+    <script src="{{ asset('assets/static/js/pages/sweetalert2.js') }}"></script>
+    {{-- DataTable --}}
+    {{-- <script src="{{ asset('https://code.jquery.com/jquery-3.7.0.js') }}"></script> --}}
+    <script src="{{ asset('https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js') }}"></script>
+    <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js') }}"></script>
+    <!-- DataTables FixedHeader JS -->
+    <script type="text/javascript" src="https://cdn.datatables.net/fixedheader/3.2.0/js/dataTables.fixedHeader.min.js"></script>
 
+    <script>
+        @if (session('success'))
+            Swal.fire({
+                title: 'Success!',
+                text: '{{ session('success') }}',
+                icon: 'success',
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 2000 // Durasi tampilan SweetAlert dalam milidetik
+            });
+        @endif
+
+
+            // DataTables
+            $(document).ready(function() {
+            // Menambahkan gaya CSS langsung di dalam JavaScript
+            var style = document.createElement('style');
+            style.innerHTML = `
+            th {
+                white-space: nowrap;
+                text-align: center;
+                background-color: #435ebe;
+                color:white;
+            }
+
+            td {
+                white-space: nowrap;
+                text-align: center;
+            }
+
+            table.dataTable {
+                border-collapse: collapse;
+                border-spacing: 0;
+                border-radius: 10px; /* Menambahkan tepi yang membulat */
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.15); /* Menambahkan bayangan */
+            }`;
+            document.head.appendChild(style);
+            $('#table1').DataTable({
+                // ajax: 'scripts/server_processing.php',
+                dom: '<"row"<"col-md-2"l><"col-md-6"B><"col-md-4"f>>tip',
+                buttons: [
+                    'csv', 'excel', 'print', 'copy'
+                ],
+                // processing: true,
+                paging: true,
+                scrollCollapse: true,
+                scrollX: true,
+                scrollY: '100vh',
+                fixedHeader: true,
+                // serverSide: true
+                columnDefs: [{
+                    "targets": '_all',
+                    "className": 'nowrap'
+                }]
+            });
+        });
+
+    </script>
     @stack('scripts')
 </body>
 </html>

@@ -30,11 +30,21 @@
         <div class="row">
             <div class="col-9">
                 <div class="card">
-                    <div class="card-header">
+                    {{-- <div class="card-header">
                         <h4>Profile Visit</h4>
-                    </div>
+                    </div> --}}
                     <div class="card-body">
-                        <div id="chart-profile-visit"></div>
+                        <center>
+                            <img src="{{ asset('assets/img/mts.png')}}" alt="MTs" width="150">
+                            <br>
+                            <br>
+                            <h5>MTs AL ANWAR JOMBANG</h5>
+                            <span>
+                                Jl. Raya Cangkringrandu Perak Jombang, CANGKRINGRANDU, Kec. Perak, Kab. Jombang, Jawa Timur
+                            </span>
+                            <br>
+                            <p>Email : mtsinsanikreasi@gmail.com Telp.081234567890</p>
+                        </center>
                     </div>
                 </div>
             </div>

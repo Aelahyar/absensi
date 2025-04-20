@@ -45,24 +45,24 @@
                 <li class="sidebar-title">Menu</li>
 
                 <li
-                    class="sidebar-item active ">
-                    <a href="index.html" class='sidebar-link'>
+                    class="sidebar-item item {{ Route::is('dashboardadmin') ? 'active' : '' }} ">
+                    <a href="{{ Route('dashboardadmin')}}" class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
                 <li
-                    class="sidebar-item  has-sub">
+                    class="sidebar-item item {{ Route::is('kelasadmin*', 'semester*') ? 'active' : '' }} has-sub">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-grid-1x2-fill"></i>
                         <span>Data Umum</span>
                     </a>
                     <ul class="submenu ">
-                        <li class="submenu-item  ">
-                            <a href="layout-default.html" class="submenu-link">Kelas</a>
+                        <li class="submenu-item item {{ Route::is('kelasadmin*') ? 'active' : '' }} ">
+                            <a href="{{ Route('kelasadmin.index') }}" class="submenu-link">Kelas</a>
                         </li>
-                        <li class="submenu-item  ">
-                            <a href="layout-vertical-1-column.html" class="submenu-link">Semester</a>
+                        <li class="submenu-item {{ Route::is('semester*') ? 'active' : '' }} ">
+                            <a href="{{ Route('semester.index' )}}" class="submenu-link">Semester</a>
                         </li>
                         <li class="submenu-item  ">
                             <a href="layout-vertical-navbar.html" class="submenu-link">Tahun Pelajaran</a>

@@ -29,6 +29,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/_login/css/main.css') }}">
     <!--===============================================================================================-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {{-- SweetAlert --}}
+    <link rel="stylesheet" href="{{ asset('assets/extensions/sweetalert2/sweetalert2.min.css') }}">
 </head>
 
 <body>
@@ -60,6 +62,9 @@
     <!--===============================================================================================-->
     <script src="{{ asset('assets/js/plugin/sweetalert/sweetalert.min.js') }}"></script>
     <script src="{{ asset('assets/_login/js/main.js') }}"></script>
+    {{-- SweetAlert --}}
+    <script src="{{ asset('assets/extensions/sweetalert2/sweetalert2.min.js') }}"></script>
+    <script src="{{ asset('assets/static/js/pages/sweetalert2.js') }}"></script>
 </body>
 
 </html>
