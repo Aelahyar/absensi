@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tahun_ajarans', function (Blueprint $table) {
-            $table->id();
+            $table->id('id_thajaran');
             $table->string('tahun_ajaran');
             $table->boolean('status')->default(1); // aktif = 1
             $table->timestamps();

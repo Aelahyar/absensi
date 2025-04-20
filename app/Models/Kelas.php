@@ -10,6 +10,7 @@ class Kelas extends Model
     use HasFactory;
 
     protected $table = 'kelas';
+    protected $primaryKey = 'id_mkelas';
 
     protected $fillable = ['kd_kelas', 'nama_kelas'];
 }

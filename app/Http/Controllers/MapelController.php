@@ -23,9 +23,9 @@ class MapelController extends Controller
         return redirect()->back()->with('success', 'Mapel berhasil ditambahkan');
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $id_mapel)
     {
-        $mapel = Mapel::findOrFail($id);
+        $mapel = Mapel::findOrFail($id_mapel);
         $mapel->update([
             'mapel' => $request->mapel
         ]);
@@ -33,9 +33,9 @@ class MapelController extends Controller
         return redirect()->back()->with('success', 'Mapel berhasil diperbarui');
     }
 
-    public function destroy($id)
+    public function destroy($id_mapel)
     {
-        Mapel::destroy($id);
+        Mapel::destroy($id_mapel);
         return redirect()->back()->with('success', 'Mapel berhasil dihapus');
     }
 }

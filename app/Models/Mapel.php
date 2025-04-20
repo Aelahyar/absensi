@@ -9,6 +9,7 @@ class Mapel extends Model
 {
     use HasFactory;
     protected $table = 'mapels';
+    protected $primaryKey = 'id_mapel';
 
     protected $fillable = ['kode_mapel', 'mapel'];
 }

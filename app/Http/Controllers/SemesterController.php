@@ -22,23 +22,23 @@ class SemesterController extends Controller
         return redirect()->back()->with('success', 'Semester ditambahkan');
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $id_semester)
     {
-        Semester::findOrFail($id)->update([
+        Semester::findOrFail($id_semester)->update([
             'semester' => $request->semester
         ]);
         return redirect()->back()->with('success', 'Semester diperbarui');
     }
 
-    public function destroy($id)
+    public function destroy($id_semester)
     {
-        Semester::destroy($id);
+        Semester::destroy($id_semester);
         return redirect()->back()->with('success', 'Semester dihapus');
     }
 
-    public function setStatus($id, $status)
+    public function setStatus($id_semester, $status)
     {
-        Semester::where('id', $id)->update(['status' => $status]);
+        Semester::where('id_semester', $id_semester)->update(['status' => $status]);
         return redirect()->back()->with('success', 'Status diperbarui');
     }
 }

@@ -107,19 +107,11 @@
 
                 </li>
                 <li
-                    class="sidebar-item  has-sub">
-                    <a href="#" class='sidebar-link'>
-                        <i class="bi bi-hexagon-fill"></i>
+                    class="sidebar-item {{ Route::is('guru*') ? 'active' : '' }} ">
+                    <a href="{{ Route('guru.index') }}" class="sidebar-link">
+                        <i class="bi bi-file-earmark-medical-fill"></i>
                         <span>Data Guru</span>
                     </a>
-                    <ul class="submenu ">
-                        <li class="submenu-item  ">
-                            <a href="form-element-input.html" class="submenu-link">Tambah Guru</a>
-                        </li>
-                        <li class="submenu-item  ">
-                            <a href="form-element-input-group.html" class="submenu-link">Daftar Guru</a>
-                        </li>
-                    </ul>
                 </li>
                 <li
                     class="sidebar-item  has-sub">

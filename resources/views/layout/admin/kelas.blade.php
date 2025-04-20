@@ -94,15 +94,15 @@
                                                 <td class="text-center">
                                                     <div class="d-flex justify-content-center align-items-center gap-1">
                                                         {{-- Tombol Edit --}}
-                                                        <button class="btn btn-link p-0" data-bs-toggle="modal" data-bs-target="#editKelas{{ $Prsh->id }}">
+                                                        <button class="btn btn-link p-0" data-bs-toggle="modal" data-bs-target="#editKelas{{ $Prsh->id_mkelas }}">
                                                             <i class="bi bi-pencil-square text-success fs-5"></i>
                                                         </button>
 
                                                         {{-- Tombol Delete --}}
-                                                        <form id="deleteForm{{ $Prsh->id }}" action="{{ route('kelasadmin.destroy', $Prsh->id) }}" method="POST">
+                                                        <form id="deleteForm{{ $Prsh->id_mkelas }}" action="{{ route('kelasadmin.destroy', $Prsh->id_mkelas) }}" method="POST">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="button" class="btn btn-link p-0" onclick="confirmDelete({{ $Prsh->id }})">
+                                                            <button type="button" class="btn btn-link p-0" onclick="confirmDelete({{ $Prsh->id_mkelas }})">
                                                                 <i class="bi bi-trash3 text-danger fs-5"></i>
                                                             </button>
                                                         </form>
@@ -112,15 +112,15 @@
                                             </tr>
 
                                             <!-- Modal Edit -->
-                                            <div class="modal fade text-left modal-borderless" id="editKelas{{ $Prsh->id }}" tabindex="-1" role="dialog"
-                                                aria-labelledby="editModalLabel{{ $Prsh->id }}" aria-hidden="true">
+                                            <div class="modal fade text-left modal-borderless" id="editKelas{{ $Prsh->id_mkelas }}" tabindex="-1" role="dialog"
+                                                aria-labelledby="editModalLabel{{ $Prsh->id_mkelas }}" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
                                                     <div class="modal-content">
-                                                        <form method="POST" action="{{ route('kelasadmin.update', $Prsh->id) }}">
+                                                        <form method="POST" action="{{ route('kelasadmin.update', $Prsh->id_mkelas) }}">
                                                             @csrf
                                                             @method('PUT')
                                                             <div class="modal-header bg-warning">
-                                                                <h4 class="modal-title white" id="editModalLabel{{ $Prsh->id }}">Edit Kelas</h4>
+                                                                <h4 class="modal-title white" id="editModalLabel{{ $Prsh->id_mkelas }}">Edit Kelas</h4>
                                                                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                                                     <i data-feather="x"></i>
                                                                 </button>
@@ -166,7 +166,7 @@
 
 @push('scripts')
 <script>
-    function confirmDelete(id) {
+    function confirmDelete(id_mklas) {
         Swal.fire({
             title: 'Yakin ingin menghapus?',
             text: "Data yang dihapus tidak bisa dikembalikan!",
@@ -178,7 +178,7 @@
             cancelButtonText: 'Batal'
         }).then((result) => {
             if (result.isConfirmed) {
-                document.getElementById('deleteForm' + id).submit();
+                document.getElementById('deleteForm' + id_mklas).submit();
             }
         });
     }
