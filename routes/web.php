@@ -4,6 +4,7 @@ use App\Http\Controllers\KelasController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\TahunAjaranController;
 use App\Http\Controllers\AdminAuthController;
 
 /*
@@ -58,5 +59,22 @@ Route::middleware(['auth:admin'])->group(function(){
         Route::put('/semester/{id}', 'update')->name('semester.update');
         Route::delete('/semester/delete/{id}', 'destroy')->name('semester.destroy');
         Route::get('/semester/set-status/{id}/{status}', 'setStatus')->name('semester.setStatus');
+    });
+
+    // Route Tahun Ajaran
+    Route::controller(App\Http\Controllers\TahunAjaranController::class)->group(function () {
+        Route::get('/tahun-ajaran', 'index')->name('tahunajaran.index');
+        Route::post('/tahun-ajaran', 'store')->name('tahunajaran.store');
+        Route::put('/tahun-ajaran/{id}', 'update')->name('tahunajaran.update');
+        Route::get('/tahun-ajaran/set-status/{id}/{status}', 'setStatus')->name('tahunajaran.setStatus');
+        Route::delete('/tahun-ajaran/{id}', 'destroy')->name('tahunajaran.destroy');
+    });
+
+    // Route Mapel
+    Route::controller(App\Http\Controllers\MapelController::class)->group(function(){
+        Route::get('/mapel',  'index')->name('mapel.index');
+        Route::post('/mapel',  'store')->name('mapel.store');
+        Route::put('/mapel/{id}',  'update')->name('mapel.update');
+        Route::delete('/mapel/{id}',  'destroy')->name('mapel.destroy');
     });
 });

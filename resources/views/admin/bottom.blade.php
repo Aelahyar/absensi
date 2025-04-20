@@ -52,7 +52,7 @@
                     </a>
                 </li>
                 <li
-                    class="sidebar-item item {{ Route::is('kelasadmin*', 'semester*') ? 'active' : '' }} has-sub">
+                    class="sidebar-item item {{ Route::is('kelasadmin*', 'semester*', 'tahunajaran*', "mapel*") ? 'active' : '' }} has-sub">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-grid-1x2-fill"></i>
                         <span>Data Umum</span>
@@ -64,14 +64,14 @@
                         <li class="submenu-item {{ Route::is('semester*') ? 'active' : '' }} ">
                             <a href="{{ Route('semester.index' )}}" class="submenu-link">Semester</a>
                         </li>
-                        <li class="submenu-item  ">
-                            <a href="layout-vertical-navbar.html" class="submenu-link">Tahun Pelajaran</a>
+                        <li class="submenu-item {{ Route::is('tahunajaran*') ? 'active' : '' }} ">
+                            <a href="{{ Route('tahunajaran.index') }}" class="submenu-link">Tahun Pelajaran</a>
                         </li>
-                        <li class="submenu-item  ">
-                            <a href="layout-rtl.html" class="submenu-link">Mata Pelajaran</a>
+                        <li class="submenu-item {{ Route::is('mapel*') ? 'active' : '' }} ">
+                            <a href="{{ Route('mapel.index') }}" class="submenu-link">Mata Pelajaran</a>
                         </li>
-                        <li class="submenu-item  ">
-                            <a href="layout-horizontal.html" class="submenu-link">Wali Kelas</a>
+                        <li class="submenu-item {{ Route::is('kelasadmin*') ? 'active' : '' }} ">
+                            <a href="{{ Route('tahunajaran.index') }}" class="submenu-link">Wali Kelas</a>
                         </li>
                     </ul>
                 </li>
