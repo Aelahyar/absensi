@@ -43,7 +43,7 @@
         </div>
     </form>
 
-    @if(session('success'))
+    {{-- @if(session('success'))
     <script>
         setTimeout(() => {
             Swal.fire({
@@ -56,6 +56,19 @@
                 timerProgressBar: true,
             });
         }, 100);
+    </script>
+    @endif --}}
+    @if (session('success'))
+    <script>
+        Swal.fire({
+            title: 'Success!',
+            text: '{{ session('success') }}',
+            icon: 'success',
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 2000 // Durasi tampilan SweetAlert dalam milidetik
+        });
     </script>
     @endif
 

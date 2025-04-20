@@ -1,48 +1,127 @@
-@section('content')
-<div class="page-heading">
-    <div class="page-title">
-        <div class="row">
-            <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Vertical Layout with Navbar</h3>
-                <p class="text-subtitle text-muted">Navbar will appear on the top of the page.</p>
-            </div>
-            <div class="col-12 col-md-6 order-md-2 order-first">
-                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Layout Vertical Navbar</li>
-                    </ol>
-                </nav>
+<div class="col-md-12">
+    <div class="card border border-primary border-3 mt-2">
+        <div class="card-body">
+            <div class="card">
+                {{-- card header --}}
+                <div class="card-header">
+                    <h5 class="card-title">
+                        <div class="col-sm-12 d-flex justify-content-between">
+                            Data Perusahaan
+                            <button href="{{ route('Perusahaan.create') }}" type="button"
+                                class="btn btn-outline-success rounded-pill" data-bs-toggle="modal"
+                                data-bs-target="#inlineForm">
+                                <strong><i class="bi bi-plus-circle"></i> Add Data <i
+                                        class="bi bi-plus-circle"></i></strong>
+                            </button>
+                        </div>
+                    </h5>
+                </div>
+                {{-- Modal Tambah --}}
+                <div class="modal fade text-left modal-borderless" id="inlineForm" tabindex="-1" role="dialog"
+                    aria-labelledby="myModalLabel33" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header bg-primary">
+                                <h4 class="modal-title white" id="myModalLabel33">Input Data Perusahaan</h4>
+                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                    <i data-feather="x"></i>
+                                </button>
+                            </div>
+                            <form action="{{ route('Perusahaan.store') }}" method="POST">
+                                <div class="modal-body">
+                                    @csrf
+                                    <label><strong>Nama Perusahaan</strong></label>
+                                    <div class="form-group">
+                                        <input type="text" name="nama" placeholder="Masukkan Nama Perusahaan"
+                                            class="form-control @error('nama') is-invalid @enderror" required
+                                            oninvalid="this.setCustomValidity('Mohon isi Nama Perusahaan')"
+                                            oninput="this.setCustomValidity('')">
+                                    </div>
+                                    <label><strong>Plant</strong></label>
+                                    <div class="form-group">
+                                        <input type="text" name="plant" placeholder="Masukan Plant"
+                                            class="form-control @error('plant') is-invalid @enderror" required
+                                            oninvalid="this.setCustomValidity('Mohon isi Plant')"
+                                            oninput="this.setCustomValidity('')">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                                        <i class="bx bx-x d-block d-sm-none"></i>
+                                        <span class="d-none d-sm-block">Batal</span>
+                                    </button>
+                                    <button type="submit" id="toast-success" class="btn btn-primary ms-1">
+                                        <span id="toast-success" class="d-none d-sm-block">Tambah</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- card body --}}
+                <div class="card-body" style="overflow: auto;">
+                    <div class="table-responsive">
+                        <table id="table1" class="display" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="text-center">No</th>
+                                    <th scope="col" class="text-center">Nama Perusahaan</th>
+                                    <th scope="col" class="text-center">Plant</th>
+                                    <th scope="col" class="text-center">Status</th>
+                                    <th scope="col" class="text-center">Tanggal Buat</th>
+                                    <th scope="col" class="text-center">Tanggal Update</th>
+                                    <th scope="col" class="text-center">AKSI</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse ($Perusahaan as $Prsh)
+                                    <tr>
+                                        <td class="text-center">{{ $i++ }}</td>
+                                        <td class="text-center">{{ $Prsh->nama }}</td>
+                                        <td class="text-center">{{ $Prsh->plant }}</td>
+                                        <td class="text-center">
+                                            @if ($Prsh->status == 1)
+                                                Aktif
+                                            @else
+                                                Tidak Aktif
+                                            @endif
+                                        </td>
+                                        <td class="text-center">{{ $Prsh->created_at }}</td>
+                                        <td class="text-center">
+                                            {{ $Prsh->created_at != $Prsh->updated_at ? $Prsh->updated_at : '' }}
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="form-button-action">
+                                                <form style="display: flex" id="deleteForm{{ $Prsh->id }}"
+                                                    action="{{ route('Perusahaan.destroy', $Prsh->id) }}"
+                                                    method="POST">
+                                                    <a href="{{ route('Perusahaan.edit', $Prsh->id) }}"
+                                                        class="btn btn-link" title="Edit Task"
+                                                        data-original-title="Edit Task">
+                                                        <i class="bi bi-pencil-square text-success"></i>
+                                                    </a>
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="button" class="btn btn-link"
+                                                        data-original-title="Remove"
+                                                        onclick="confirmDelete({{ $Prsh->id }})">
+                                                        <i class="bi bi-trash3 text-danger"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <div class="alert alert-danger">
+                                        Data Perusahaan belum Tersedia.
+                                    </div>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <section class="section">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">About Vertical Navbar</h4>
-            </div>
-            <div class="card-body">
-                <p>Vertical Navbar is a layout option that you can use with Mazer. </p>
-
-                <p>In case you want the navbar to be sticky on top while scrolling, add <code>.navbar-fixed</code> class alongside with <code>.layout-navbar</code> class.</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">Dummy Text</h4>
-            </div>
-            <div class="card-body">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In mollis tincidunt tempus. Duis vitae facilisis enim, at rutrum lacus. Nam at nisl ut ex egestas placerat sodales id quam. Aenean sit amet nibh quis lacus pellentesque venenatis vitae at justo. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse venenatis tincidunt odio ut rutrum. Maecenas ut urna venenatis, dapibus tortor sed, ultrices justo. Phasellus scelerisque, nibh quis gravida venenatis, nibh mi lacinia est, et porta purus nisi eget nibh. Fusce pretium vestibulum sagittis. Donec sodales velit cursus convallis sollicitudin. Nunc vel scelerisque elit, eget facilisis tellus. Donec id molestie ipsum. Nunc tincidunt tellus sed felis vulputate euismod.
-                </p>
-                <p>
-                    Proin accumsan nec arcu sit amet volutpat. Proin non risus luctus, tempus quam quis, volutpat orci. Phasellus commodo arcu dui, ut convallis quam sodales maximus. Aenean sollicitudin massa a quam fermentum, et efficitur metus convallis. Curabitur nec laoreet ipsum, eu congue sem. Nunc pellentesque quis erat at gravida. Vestibulum dapibus efficitur felis, vel luctus libero congue eget. Donec mollis pellentesque arcu, eu commodo nunc porta sit amet. In commodo augue id mauris tempor, sed dignissim nulla facilisis. Ut non mattis justo, ut placerat justo. Vestibulum scelerisque cursus facilisis. Suspendisse velit justo, scelerisque ac ultrices eu, consectetur ac odio.
-                </p>
-                <p>
-                    In pharetra quam vel lobortis fermentum. Nulla vel risus ut sapien porttitor volutpat eu ac lorem. Vestibulum porta elit magna, ut ultrices sem fermentum ut. Vestibulum blandit eros ut imperdiet porttitor. Pellentesque tempus nunc sed augue auctor eleifend. Sed nisi sem, lobortis eget faucibus placerat, hendrerit vitae elit. Vestibulum elit orci, pretium vel libero at, imperdiet congue lectus. Praesent rutrum id turpis non aliquam. Cras dignissim, metus vitae aliquam faucibus, elit augue dignissim nulla, bibendum consectetur leo libero a tortor. Vestibulum non tincidunt nibh. Ut imperdiet elit vel vehicula ultricies. Nulla maximus justo sit amet fringilla laoreet. Aliquam malesuada diam in augue mattis aliquam. Pellentesque id eros dignissim, dapibus sem ac, molestie dolor. Mauris purus lacus, tempor sit amet vestibulum vitae, ultrices eu urna.
-                </p>
-            </div>
-        </div>
-    </section>
 </div>
-@endsection
