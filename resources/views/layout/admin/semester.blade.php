@@ -65,7 +65,7 @@
                         {{-- card body --}}
                         <div class="card-body" style="overflow: auto;">
                             <div class="table-responsive">
-                                <table id="table1" class="display table table-striped" style="width:100%">
+                                <table id="table1" class="display" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th class="text-center">No</th>
