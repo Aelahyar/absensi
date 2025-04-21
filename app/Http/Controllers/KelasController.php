@@ -26,21 +26,21 @@ class KelasController extends Controller
         return redirect()->back()->with('success', 'Kelas berhasil ditambahkan!');
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $id_mkelas)
     {
         $request->validate([
             'nama_kelas' => 'required'
         ]);
 
-        $kelas = Kelas::findOrFail($id);
+        $kelas = Kelas::findOrFail($id_mkelas);
         $kelas->update(['nama_kelas' => $request->nama_kelas]);
 
         return redirect()->back()->with('success', 'Kelas berhasil diperbarui!');
     }
 
-    public function destroy($id)
+    public function destroy($id_mkelas)
     {
-        $kelas = Kelas::findOrFail($id);
+        $kelas = Kelas::findOrFail($id_mkelas);
         $kelas->delete();
 
         return redirect()->back()->with('success', 'Kelas berhasil dihapus!');

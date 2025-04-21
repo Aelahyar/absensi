@@ -48,33 +48,57 @@ Route::middleware(['auth:admin'])->group(function(){
     Route::controller(App\Http\Controllers\KelasController::class)->group(function () {
         Route::get('/kelas', 'index')->name('kelasadmin.index');
         Route::post('/kelas',  'store')->name('kelasadmin.store');
-        Route::put('/kelas/{id}',  'update')->name('kelasadmin.update');
-        Route::delete('/kelas/{id}',  'destroy')->name('kelasadmin.destroy');
+        Route::put('/kelas/{id_mklas}',  'update')->name('kelasadmin.update');
+        Route::delete('/kelas/{id_mklas}',  'destroy')->name('kelasadmin.destroy');
     });
 
     // Route semester
     Route::controller(App\Http\Controllers\SemesterController::class)->group(function(){
         Route::get('/semester', 'index')->name('semester.index');
         Route::post('/semester', 'store')->name('semester.store');
-        Route::put('/semester/{id}', 'update')->name('semester.update');
-        Route::delete('/semester/delete/{id}', 'destroy')->name('semester.destroy');
-        Route::get('/semester/set-status/{id}/{status}', 'setStatus')->name('semester.setStatus');
+        Route::put('/semester/{id_semester}', 'update')->name('semester.update');
+        Route::delete('/semester/delete/{id_semester}', 'destroy')->name('semester.destroy');
+        Route::get('/semester/set-status/{id_semester}/{status}', 'setStatus')->name('semester.setStatus');
     });
 
     // Route Tahun Ajaran
     Route::controller(App\Http\Controllers\TahunAjaranController::class)->group(function () {
         Route::get('/tahun-ajaran', 'index')->name('tahunajaran.index');
         Route::post('/tahun-ajaran', 'store')->name('tahunajaran.store');
-        Route::put('/tahun-ajaran/{id}', 'update')->name('tahunajaran.update');
-        Route::get('/tahun-ajaran/set-status/{id}/{status}', 'setStatus')->name('tahunajaran.setStatus');
-        Route::delete('/tahun-ajaran/{id}', 'destroy')->name('tahunajaran.destroy');
+        Route::put('/tahun-ajaran/{id_thajaran}', 'update')->name('tahunajaran.update');
+        Route::get('/tahun-ajaran/set-status/{id_thajaran}/{status}', 'setStatus')->name('tahunajaran.setStatus');
+        Route::delete('/tahun-ajaran/{id_thajaran}', 'destroy')->name('tahunajaran.destroy');
     });
 
     // Route Mapel
     Route::controller(App\Http\Controllers\MapelController::class)->group(function(){
         Route::get('/mapel',  'index')->name('mapel.index');
         Route::post('/mapel',  'store')->name('mapel.store');
-        Route::put('/mapel/{id}',  'update')->name('mapel.update');
-        Route::delete('/mapel/{id}',  'destroy')->name('mapel.destroy');
+        Route::put('/mapel/{id_mapel}',  'update')->name('mapel.update');
+        Route::delete('/mapel/{id_mapel}',  'destroy')->name('mapel.destroy');
+    });
+
+    // Route Wali Kelas
+    Route::controller(App\Http\Controllers\WaliKelasController::class)->group(function(){
+        Route::get('/walikelas',  'index')->name('walikelas.index');
+        Route::post('/walikelas',  'store')->name('walikelas.store');
+        Route::put('/walikelas/{id_walikelas}',  'update')->name('walikelas.update');
+        Route::delete('/walikelas/{id_walikelas}',  'destroy')->name('walikelas.destroy');
+    });
+
+    // Route Guru
+    Route::controller(App\Http\Controllers\GuruController::class)->group(function(){
+        Route::get('/guru', 'index')->name('guru.index');
+        Route::post('/guru', 'store')->name('guru.store');
+        Route::put('/guru/{id_guru}', 'update')->name('guru.update');
+        Route::delete('/guru/{id_guru}', 'destroy')->name('guru.destroy');
+    });
+
+    // Route Guru
+    Route::controller(App\Http\Controllers\KepsekController::class)->group(function(){
+        Route::get('/kepsek', 'index')->name('kepsek.index');
+        Route::post('/kepsek', 'store')->name('kepsek.store');
+        Route::put('/kepsek/{id_kepsek}', 'update')->name('kepsek.update');
+        Route::delete('/kepsek/{id_kepsek}', 'destroy')->name('kepsek.destroy');
     });
 });

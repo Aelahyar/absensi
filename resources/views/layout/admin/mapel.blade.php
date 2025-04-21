@@ -24,7 +24,7 @@
                                 <div class="col-sm-12 d-flex justify-content-between">
                                     Daftar Mata Pelajaran
                                     <button type="button" class="btn btn-outline-success rounded-pill" data-bs-toggle="modal" data-bs-target="#tambahMapel">
-                                        <strong>Tambah Data</strong>
+                                        <strong>Add Data</strong>
                                     </button>
                                 </div>
                             </h5>
@@ -79,13 +79,13 @@
                                             <td>{{ $m->mapel }}</td>
                                             <td>
                                                 <div class="d-flex justify-content-center gap-1">
-                                                    <button class="btn btn-link p-0" data-bs-toggle="modal" data-bs-target="#editMapel{{ $m->id }}">
+                                                    <button class="btn btn-link p-0" data-bs-toggle="modal" data-bs-target="#editMapel{{ $m->id_mapel }}">
                                                         <i class="bi bi-pencil-square text-success fs-5"></i>
                                                     </button>
-                                                    <form action="{{ route('mapel.destroy', $m->id) }}" method="POST" id="deleteForm{{ $m->id }}">
+                                                    <form action="{{ route('mapel.destroy', $m->id_mapel) }}" method="POST" id="deleteForm{{ $m->id_mapel }}">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="button" class="btn btn-link p-0" onclick="confirmDelete({{ $m->id }})">
+                                                        <button type="button" class="btn btn-link p-0" onclick="confirmDelete({{ $m->id_mapel }})">
                                                             <i class="bi bi-trash3 text-danger fs-5"></i>
                                                         </button>
                                                     </form>
@@ -94,14 +94,14 @@
                                         </tr>
 
                                         {{-- Modal Edit --}}
-                                        <div class="modal fade text-left modal-borderless" id="editMapel{{ $m->id }}" tabindex="-1" role="dialog" aria-labelledby="editMapelLabel{{ $m->id }}" aria-hidden="true">
+                                        <div class="modal fade text-left modal-borderless" id="editMapel{{ $m->id_mapel }}" tabindex="-1" role="dialog" aria-labelledby="editMapelLabel{{ $m->id_mapel }}" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
                                                 <div class="modal-content">
-                                                    <form action="{{ route('mapel.update', $m->id) }}" method="POST">
+                                                    <form action="{{ route('mapel.update', $m->id_mapel) }}" method="POST">
                                                         @csrf
                                                         @method('PUT')
                                                         <div class="modal-header bg-warning">
-                                                            <h4 class="modal-title white" id="editMapelLabel{{ $m->id }}">Edit Mapel</h4>
+                                                            <h4 class="modal-title white" id="editMapelLabel{{ $m->id_mapel }}">Edit Mapel</h4>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
@@ -139,7 +139,7 @@
 
 @push('scripts')
 <script>
-    function confirmDelete(id) {
+    function confirmDelete(id_mapel) {
         Swal.fire({
             title: 'Yakin ingin menghapus?',
             text: "Data tidak dapat dikembalikan!",
@@ -151,7 +151,7 @@
             cancelButtonText: 'Batal'
         }).then((result) => {
             if (result.isConfirmed) {
-                document.getElementById('deleteForm' + id).submit();
+                document.getElementById('deleteForm' + id_mapel).submit();
             }
         });
     }

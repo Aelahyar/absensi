@@ -29,7 +29,7 @@
                                         class="btn btn-outline-success rounded-pill"
                                         data-bs-toggle="modal"
                                         data-bs-target="#addSemester">
-                                        <strong>Tambah</strong>
+                                        <strong>Add Data</strong>
                                     </button>
                                 </div>
                             </h5>
@@ -90,29 +90,34 @@
                                                 <div class="d-flex justify-content-center gap-1">
                                                     @if ($smt->status == 1)
                                                         {{-- Kalau sedang aktif, tampilkan tombol Nonaktifkan --}}
-                                                        <a href="{{ route('semester.setStatus', ['id' => $smt->id, 'status' => 0]) }}" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menonaktifkan semester ini?')">
+                                                        <a href="javascript:void(0);"
+                                                        class="btn btn-danger btn-sm"
+                                                        onclick="confirmUpdateStatus('{{ route('semester.setStatus', ['id_semester' => $smt->id_semester, 'status' => 0]) }}', 'nonaktifkan')">
                                                             <i class="fas fa-times-circle"></i> Nonaktifkan
                                                         </a>
                                                     @else
                                                         {{-- Kalau sedang nonaktif, tampilkan tombol Aktifkan --}}
-                                                        <a href="{{ route('semester.setStatus', ['id' => $smt->id, 'status' => 1]) }}" class="btn btn-success btn-sm" onclick="return confirm('Yakin ingin mengaktifkan semester ini?')">
+                                                        <a href="javascript:void(0);"
+                                                        class="btn btn-success btn-sm"
+                                                        onclick="confirmUpdateStatus('{{ route('semester.setStatus', ['id_semester' => $smt->id_semester, 'status' => 1]) }}', 'aktifkan')">
                                                             <i class="fas fa-check-circle"></i> Aktifkan
                                                         </a>
                                                     @endif
 
 
+
                                                     {{-- Edit --}}
                                                     <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                                        data-bs-target="#editSemester{{ $smt->id }}">
+                                                        data-bs-target="#editSemester{{ $smt->id_semester }}">
                                                         <i class="bi bi-pencil-square"></i> Edit
                                                     </button>
 
                                                     {{-- Delete --}}
-                                                    <form id="deleteForm{{ $smt->id }}" action="{{ route('semester.destroy', $smt->id) }}" method="POST">
+                                                    <form id="deleteForm{{ $smt->id_semester }}" action="{{ route('semester.destroy', $smt->id_semester) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete({{ $smt->id }})">
-                                                            <i class="bi bi-trash3"></i> Del
+                                                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete({{ $smt->id_semester }})">
+                                                            <i class="bi bi-trash3"></i> Delete
                                                         </button>
                                                     </form>
                                                 </div>
@@ -120,11 +125,11 @@
                                         </tr>
 
                                         {{-- Modal Edit --}}
-                                        <div class="modal fade text-left modal-borderless" id="editSemester{{ $smt->id }}" tabindex="-1" role="dialog"
-                                            aria-labelledby="editModalLabel{{ $smt->id }}" aria-hidden="true">
+                                        <div class="modal fade text-left modal-borderless" id="editSemester{{ $smt->id_semester }}" tabindex="-1" role="dialog"
+                                            aria-labelledby="editModalLabel{{ $smt->id_semester }}" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
                                                 <div class="modal-content">
-                                                    <form method="POST" action="{{ route('semester.update', $smt->id) }}">
+                                                    <form method="POST" action="{{ route('semester.update', $smt->id_semester) }}">
                                                         @csrf
                                                         @method('PUT')
                                                         <div class="modal-header bg-warning">
@@ -165,10 +170,10 @@
 
 @push('scripts')
 <script>
-    function confirmDelete(id) {
+    function confirmDelete(id_semester) {
         Swal.fire({
             title: 'Yakin ingin menghapus?',
-            text: "Data yang dihapus tidak bisa dikembalikan!",
+            text: "Data yang dihapus tid_semesterak bisa dikembalikan!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -177,9 +182,25 @@
             cancelButtonText: 'Batal'
         }).then((result) => {
             if (result.isConfirmed) {
-                document.getElementById('deleteForm' + id).submit();
+                document.getElementById('deleteForm' + id_semester).submit();
             }
         });
     }
+    function confirmUpdateStatus(url, action) {
+        Swal.fire({
+            title: `Yakin ingin ${action} semester ini?`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, lanjutkan!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = url;
+            }
+        });
+    }
+
 </script>
 @endpush

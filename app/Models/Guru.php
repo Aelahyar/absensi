@@ -13,15 +13,10 @@ class Guru extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $table = 'guru';
-    protected $primaryKey = 'nik';
+    protected $primaryKey = 'id_guru';
 
-    protected $fillable = [
-        'email',
-        'nama_lengkap',
-        'mapel',
-        'no_hp',
-        'password',
-    ];
+    protected $fillable = ['nik', 'nama_guru', 'email', 'status'];
+
 
     protected $hidden = [
         'password',

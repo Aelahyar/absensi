@@ -27,7 +27,7 @@
                                 <div class="col-sm-12 d-flex justify-content-between">
                                     Data Tahun Pelajaran
                                     <button type="button" class="btn btn-outline-success rounded-pill" data-bs-toggle="modal" data-bs-target="#addTahunPelajaran">
-                                        <strong>Tambah Data</strong>
+                                        <strong>Add Data</strong>
                                     </button>
                                 </div>
                             </h5>
@@ -58,29 +58,33 @@
                                                     @endif
                                                 </td>
                                                 <td class="text-center">
-                                                    {{-- Tombol Aktivasi/Non-aktivasi --}}
-                                                    @if ($ta->status == 1)
+                                                {{-- Tombol Aktivasi/Non-aktivasi --}}
+                                                @if ($ta->status == 1)
                                                     {{-- Kalau sedang aktif, tampilkan tombol Nonaktifkan --}}
-                                                    <a href="{{ route('tahunajaran.setStatus', ['id' => $ta->id, 'status' => 0]) }}" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menonaktifkan semester ini?')">
-                                                        <i class="fas fa-times-circle"></i> Nonaktifkan
-                                                    </a>
+                                                    <a href="javascript:void(0);"
+                                                        class="btn btn-danger btn-sm"
+                                                        onclick="confirmUpdateStatus('{{ route('tahunajaran.setStatus', ['id_thajaran' => $ta->id_thajaran, 'status' => 0]) }}', 'nonaktifkan')">
+                                                            <i class="fas fa-times-circle"></i> Nonaktifkan
+                                                        </a>
                                                 @else
                                                     {{-- Kalau sedang nonaktif, tampilkan tombol Aktifkan --}}
-                                                    <a href="{{ route('tahunajaran.setStatus', ['id' => $ta->id, 'status' => 1]) }}" class="btn btn-success btn-sm" onclick="return confirm('Yakin ingin mengaktifkan semester ini?')">
-                                                        <i class="fas fa-check-circle"></i> Aktifkan
-                                                    </a>
+                                                    <a href="javascript:void(0);"
+                                                        class="btn btn-success btn-sm"
+                                                        onclick="confirmUpdateStatus('{{ route('tahunajaran.setStatus', ['id_thajaran' => $ta->id_thajaran, 'status' => 1]) }}', 'aktifkan')">
+                                                            <i class="fas fa-check-circle"></i> Aktifkan
+                                                        </a>
                                                 @endif
 
                                                     {{-- Tombol Edit --}}
-                                                    <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editTahunPelajaran{{ $ta->id }}">
+                                                    <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editTahunPelajaran{{ $ta->id_thajaran }}">
                                                         <i class="bi bi-pencil-square"></i> Edit
                                                     </button>
 
                                                     {{-- Tombol Delete --}}
-                                                    <form action="{{ route('tahunajaran.destroy', $ta->id) }}" method="POST" class="d-inline" id="deleteForm{{ $ta->id }}">
+                                                    <form action="{{ route('tahunajaran.destroy', $ta->id_thajaran) }}" method="POST" class="d-inline" id="deleteForm{{ $ta->id_thajaran }}">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete({{ $ta->id }})">
+                                                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete({{ $ta->id_thajaran }})">
                                                             <i class="bi bi-trash3"></i> Hapus
                                                         </button>
                                                     </form>
@@ -88,10 +92,10 @@
                                             </tr>
 
                                             {{-- Modal Edit --}}
-                                            <div class="modal fade" id="editTahunPelajaran{{ $ta->id }}" tabindex="-1" role="dialog">
+                                            <div class="modal fade" id="editTahunPelajaran{{ $ta->id_thajaran }}" tabindex="-1" role="dialog">
                                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                                     <div class="modal-content">
-                                                        <form action="{{ route('tahunajaran.update', $ta->id) }}" method="POST">
+                                                        <form action="{{ route('tahunajaran.update', $ta->id_thajaran) }}" method="POST">
                                                             @csrf
                                                             @method('PUT')
                                                             <div class="modal-header bg-warning">
@@ -108,8 +112,8 @@
                                                                     <input type="hidden" name="status" value="0">
 
                                                                     <!-- Checkbox ini akan override jadi 1 jika dicentang -->
-                                                                    <input class="form-check-input" type="checkbox" name="status" value="1" id="statusCheck{{ $ta->id }}" {{ $ta->status == 1 ? 'checked' : '' }}>
-                                                                    <label class="form-check-label" for="statusCheck{{ $ta->id }}">
+                                                                    <input class="form-check-input" type="checkbox" name="status" value="1" id="statusCheck{{ $ta->id_thajaran }}" {{ $ta->status == 1 ? 'checked' : '' }}>
+                                                                    <label class="form-check-label" for="statusCheck{{ $ta->id_thajaran }}">
                                                                         Aktifkan
                                                                     </label>
                                                                 </div>
@@ -174,7 +178,22 @@
 
 @push('scripts')
 <script>
-    function confirmDelete(id) {
+    function confirmUpdateStatus(url, action) {
+        Swal.fire({
+            title: `Yakin ingin ${action} tahun ajaran ini?`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, lanjutkan!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = url;
+            }
+        });
+    }
+    function confirmDelete(id_thajaran) {
         Swal.fire({
             title: 'Yakin ingin menghapus?',
             text: "Data yang dihapus tidak dapat dikembalikan!",
@@ -186,7 +205,7 @@
             cancelButtonText: 'Batal'
         }).then((result) => {
             if (result.isConfirmed) {
-                document.getElementById('deleteForm' + id).submit();
+                document.getElementById('deleteForm' + id_thajaran).submit();
             }
         });
     }

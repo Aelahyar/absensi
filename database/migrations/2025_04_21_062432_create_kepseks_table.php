@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('semesters', function (Blueprint $table) {
-            $table->id('id_semester');
-            $table->string('semester');
-            $table->boolean('status')->default(1); // 1 = aktif, 0 = tidak aktif
+        Schema::create('kepseks', function (Blueprint $table) {
+            $table->id('id_kepsek');
+            $table->string('nik')->unique();
+            $table->string('nama_kepsek');
+            $table->string('email')->unique();
+            $table->enum('status', ['Y', 'N'])->default('Y');
             $table->timestamps();
         });
     }
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('semesters');
+        Schema::dropIfExists('kepseks');
     }
 };
