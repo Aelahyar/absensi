@@ -78,11 +78,27 @@ Route::middleware(['auth:admin'])->group(function(){
         Route::delete('/mapel/{id_mapel}',  'destroy')->name('mapel.destroy');
     });
 
+    // Route Wali Kelas
+    Route::controller(App\Http\Controllers\WaliKelasController::class)->group(function(){
+        Route::get('/walikelas',  'index')->name('walikelas.index');
+        Route::post('/walikelas',  'store')->name('walikelas.store');
+        Route::put('/walikelas/{id_walikelas}',  'update')->name('walikelas.update');
+        Route::delete('/walikelas/{id_walikelas}',  'destroy')->name('walikelas.destroy');
+    });
+
     // Route Guru
     Route::controller(App\Http\Controllers\GuruController::class)->group(function(){
         Route::get('/guru', 'index')->name('guru.index');
         Route::post('/guru', 'store')->name('guru.store');
         Route::put('/guru/{id_guru}', 'update')->name('guru.update');
         Route::delete('/guru/{id_guru}', 'destroy')->name('guru.destroy');
+    });
+
+    // Route Guru
+    Route::controller(App\Http\Controllers\KepsekController::class)->group(function(){
+        Route::get('/kepsek', 'index')->name('kepsek.index');
+        Route::post('/kepsek', 'store')->name('kepsek.store');
+        Route::put('/kepsek/{id_kepsek}', 'update')->name('kepsek.update');
+        Route::delete('/kepsek/{id_kepsek}', 'destroy')->name('kepsek.destroy');
     });
 });

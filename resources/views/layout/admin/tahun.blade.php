@@ -27,7 +27,7 @@
                                 <div class="col-sm-12 d-flex justify-content-between">
                                     Data Tahun Pelajaran
                                     <button type="button" class="btn btn-outline-success rounded-pill" data-bs-toggle="modal" data-bs-target="#addTahunPelajaran">
-                                        <strong>Tambah Data</strong>
+                                        <strong>Add Data</strong>
                                     </button>
                                 </div>
                             </h5>
@@ -58,17 +58,21 @@
                                                     @endif
                                                 </td>
                                                 <td class="text-center">
-                                                    {{-- Tombol Aktivasi/Non-aktivasi --}}
-                                                    @if ($ta->status == 1)
+                                                {{-- Tombol Aktivasi/Non-aktivasi --}}
+                                                @if ($ta->status == 1)
                                                     {{-- Kalau sedang aktif, tampilkan tombol Nonaktifkan --}}
-                                                    <a href="{{ route('tahunajaran.setStatus', ['id_thajaran' => $ta->id_thajaran, 'status' => 0]) }}" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menonaktifkan semester ini?')">
-                                                        <i class="fas fa-times-circle"></i> Nonaktifkan
-                                                    </a>
+                                                    <a href="javascript:void(0);"
+                                                        class="btn btn-danger btn-sm"
+                                                        onclick="confirmUpdateStatus('{{ route('tahunajaran.setStatus', ['id_thajaran' => $ta->id_thajaran, 'status' => 0]) }}', 'nonaktifkan')">
+                                                            <i class="fas fa-times-circle"></i> Nonaktifkan
+                                                        </a>
                                                 @else
                                                     {{-- Kalau sedang nonaktif, tampilkan tombol Aktifkan --}}
-                                                    <a href="{{ route('tahunajaran.setStatus', ['id_thajaran' => $ta->id_thajaran, 'status' => 1]) }}" class="btn btn-success btn-sm" onclick="return confirm('Yakin ingin mengaktifkan semester ini?')">
-                                                        <i class="fas fa-check-circle"></i> Aktifkan
-                                                    </a>
+                                                    <a href="javascript:void(0);"
+                                                        class="btn btn-success btn-sm"
+                                                        onclick="confirmUpdateStatus('{{ route('tahunajaran.setStatus', ['id_thajaran' => $ta->id_thajaran, 'status' => 1]) }}', 'aktifkan')">
+                                                            <i class="fas fa-check-circle"></i> Aktifkan
+                                                        </a>
                                                 @endif
 
                                                     {{-- Tombol Edit --}}
@@ -174,6 +178,21 @@
 
 @push('scripts')
 <script>
+    function confirmUpdateStatus(url, action) {
+        Swal.fire({
+            title: `Yakin ingin ${action} tahun ajaran ini?`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, lanjutkan!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = url;
+            }
+        });
+    }
     function confirmDelete(id_thajaran) {
         Swal.fire({
             title: 'Yakin ingin menghapus?',

@@ -70,8 +70,8 @@
                         <li class="submenu-item {{ Route::is('mapel*') ? 'active' : '' }} ">
                             <a href="{{ Route('mapel.index') }}" class="submenu-link">Mata Pelajaran</a>
                         </li>
-                        <li class="submenu-item {{ Route::is('kelasadmin*') ? 'active' : '' }} ">
-                            <a href="{{ Route('tahunajaran.index') }}" class="submenu-link">Wali Kelas</a>
+                        <li class="submenu-item {{ Route::is('walikelas*') ? 'active' : '' }} ">
+                            <a href="{{ Route('walikelas.index') }}" class="submenu-link">Wali Kelas</a>
                         </li>
                     </ul>
                 </li>
@@ -91,20 +91,11 @@
                     </ul>
                 </li>
                 <li
-                    class="sidebar-item  has-sub">
-                    <a href="#" class='sidebar-link'>
-                        <i class="bi bi-hexagon-fill"></i>
+                    class="sidebar-item {{ Route::is('kepsek*') ? 'active' : '' }} ">
+                    <a href="{{ Route('kepsek.index') }}" class="sidebar-link">
+                        <i class="bi bi-file-earmark-medical-fill"></i>
                         <span>Data Kepala Sekolah</span>
                     </a>
-                    <ul class="submenu ">
-                        <li class="submenu-item  ">
-                            <a href="form-element-input.html" class="submenu-link">Tambah Kepala Sekolah</a>
-                        </li>
-                        <li class="submenu-item  ">
-                            <a href="form-element-input-group.html" class="submenu-link">Daftar Kepala Sekolah</a>
-                        </li>
-                    </ul>
-
                 </li>
                 <li
                     class="sidebar-item {{ Route::is('guru*') ? 'active' : '' }} ">

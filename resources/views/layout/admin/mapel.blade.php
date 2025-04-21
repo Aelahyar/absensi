@@ -24,7 +24,7 @@
                                 <div class="col-sm-12 d-flex justify-content-between">
                                     Daftar Mata Pelajaran
                                     <button type="button" class="btn btn-outline-success rounded-pill" data-bs-toggle="modal" data-bs-target="#tambahMapel">
-                                        <strong>Tambah Data</strong>
+                                        <strong>Add Data</strong>
                                     </button>
                                 </div>
                             </h5>

@@ -29,7 +29,7 @@
                                         class="btn btn-outline-success rounded-pill"
                                         data-bs-toggle="modal"
                                         data-bs-target="#addSemester">
-                                        <strong>Tambah</strong>
+                                        <strong>Add Data</strong>
                                     </button>
                                 </div>
                             </h5>
@@ -90,15 +90,20 @@
                                                 <div class="d-flex justify-content-center gap-1">
                                                     @if ($smt->status == 1)
                                                         {{-- Kalau sedang aktif, tampilkan tombol Nonaktifkan --}}
-                                                        <a href="{{ route('semester.setStatus', ['id_semester' => $smt->id_semester, 'status' => 0]) }}" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menonaktifkan semester ini?')">
+                                                        <a href="javascript:void(0);"
+                                                        class="btn btn-danger btn-sm"
+                                                        onclick="confirmUpdateStatus('{{ route('semester.setStatus', ['id_semester' => $smt->id_semester, 'status' => 0]) }}', 'nonaktifkan')">
                                                             <i class="fas fa-times-circle"></i> Nonaktifkan
                                                         </a>
                                                     @else
                                                         {{-- Kalau sedang nonaktif, tampilkan tombol Aktifkan --}}
-                                                        <a href="{{ route('semester.setStatus', ['id_semester' => $smt->id_semester, 'status' => 1]) }}" class="btn btn-success btn-sm" onclick="return confirm('Yakin ingin mengaktifkan semester ini?')">
+                                                        <a href="javascript:void(0);"
+                                                        class="btn btn-success btn-sm"
+                                                        onclick="confirmUpdateStatus('{{ route('semester.setStatus', ['id_semester' => $smt->id_semester, 'status' => 1]) }}', 'aktifkan')">
                                                             <i class="fas fa-check-circle"></i> Aktifkan
                                                         </a>
                                                     @endif
+
 
 
                                                     {{-- Edit --}}
@@ -181,5 +186,21 @@
             }
         });
     }
+    function confirmUpdateStatus(url, action) {
+        Swal.fire({
+            title: `Yakin ingin ${action} semester ini?`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, lanjutkan!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = url;
+            }
+        });
+    }
+
 </script>
 @endpush

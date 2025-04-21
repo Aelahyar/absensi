@@ -18,7 +18,7 @@ class GuruController extends Controller
         {
             $request->validate([
                 'nik' => 'required|unique:guru,nik',
-                'nama_guru' => 'required|string|max:100',
+                'nama_guru' => 'required|string|max:255',
                 'email' => 'required|email|unique:guru,email',
             ]);
 
