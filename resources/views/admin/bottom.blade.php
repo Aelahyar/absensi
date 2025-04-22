@@ -52,7 +52,7 @@
                     </a>
                 </li>
                 <li
-                    class="sidebar-item item {{ Route::is('kelasadmin*', 'semester*', 'tahunajaran*', "mapel*") ? 'active' : '' }} has-sub">
+                    class="sidebar-item item {{ Route::is('kelasadmin*', 'semester*', 'tahunajaran*', "mapel*", 'walikelas*') ? 'active' : '' }} has-sub">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-grid-1x2-fill"></i>
                         <span>Data Umum</span>
@@ -93,8 +93,8 @@
                 <li
                     class="sidebar-item {{ Route::is('kepsek*') ? 'active' : '' }} ">
                     <a href="{{ Route('kepsek.index') }}" class="sidebar-link">
-                        <i class="bi bi-file-earmark-medical-fill"></i>
-                        <span>Data Kepala Sekolah</span>
+                        <i class="bi bi-person-badge-fill"></i>
+                        <span>Kepala Sekolah</span>
                     </a>
                 </li>
                 <li
@@ -105,39 +105,16 @@
                     </a>
                 </li>
                 <li
-                    class="sidebar-item  has-sub">
-                    <a href="#" class='sidebar-link'>
-                        <i class="bi bi-hexagon-fill"></i>
+                    class="sidebar-item {{ Route::is('siswa*') ? 'active' : '' }} ">
+                    <a href="{{ Route('siswa.index') }}" class="sidebar-link">
+                        <i class="bi bi-clipboard-data-fill"></i>
                         <span>Data Siswa</span>
                     </a>
-                    <ul class="submenu ">
-                        <li class="submenu-item  ">
-                            <a href="form-element-input.html" class="submenu-link">Tambah Siswa</a>
-                        </li>
-                        <li class="submenu-item  ">
-                            <a href="form-element-input-group.html" class="submenu-link">Daftar Siswa</a>
-                        </li>
-                    </ul>
                 </li>
                 <li
                     class="sidebar-item  has-sub">
                     <a href="#" class='sidebar-link'>
-                        <i class="bi bi-hexagon-fill"></i>
-                        <span>Data Guru</span>
-                    </a>
-                    <ul class="submenu ">
-                        <li class="submenu-item  ">
-                            <a href="form-element-input.html" class="submenu-link">Tambah Guru</a>
-                        </li>
-                        <li class="submenu-item  ">
-                            <a href="form-element-input-group.html" class="submenu-link">Daftar Guru</a>
-                        </li>
-                    </ul>
-                </li>
-                <li
-                    class="sidebar-item  has-sub">
-                    <a href="#" class='sidebar-link'>
-                        <i class="bi bi-hexagon-fill"></i>
+                        <i class="bi bi-clipboard2-check-fill"></i>
                         <span>Rekap Absensi</span>
                     </a>
                     <ul class="submenu ">
@@ -173,7 +150,7 @@
                     <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
                         <div class="user-menu d-flex">
                             <div class="user-name text-end me-3">
-                                <h6 class="mb-0 text-gray-600">Al Anwar</h6>
+                                <h6 class="mb-0 text-gray-600">{{ Auth::guard('admin')->user()->nama_lengkap}}</h6>
                                 <p class="mb-0 text-sm text-gray-600">Administrator</p>
                             </div>
                             <div class="user-img d-flex align-items-center">
@@ -189,10 +166,12 @@
                         </li>
                         <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-person me-2"></i> My
                                 Profile</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-gear me-2"></i>
-                                Settings</a></li>
-                            <hr class="dropdown-divider">
-                        </li>
+                                <li>
+                                    <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#gantiPassword">
+                                        <i class="icon-mid bi bi-gear me-2"></i> Settings
+                                    </a>
+                                </li>
+                                <hr class="dropdown-divider">
                         <li><a class="dropdown-item" href="/logoutadmin"><i
                                     class="icon-mid bi bi-box-arrow-left me-2"></i> Logout</a></li>
                     </ul>
@@ -200,4 +179,53 @@
             </div>
         </div>
     </nav>
+
+    <!-- Modal Ganti Password -->
+    <div class="modal fade" id="gantiPassword" tabindex="-1" role="dialog" aria-labelledby="gantiPass" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <form method="POST" action="{{ route('update.password') }}">
+                    @csrf
+                    <div class="modal-header">
+                        <h4 class="modal-title">Update Akun</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        {{-- @if(session('success'))
+                            <div class="alert alert-success">{{ session('success') }}</div>
+                        @endif
+                        @if(session('error'))
+                            <div class="alert alert-danger">{{ session('error') }}</div>
+                        @endif --}}
+
+                        <div class="form-group mb-3">
+                            <label>Nama Lengkap</label>
+                            <input name="nama_lengkap" type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label>Username</label>
+                            <input name="username" type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label>Password Lama</label>
+                            <input name="pass" type="password" class="form-control" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label>Password Baru</label>
+                            <input name="pass1" type="password" class="form-control">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label>Konfirmasi Password Baru</label>
+                            <input name="pass1_confirmation" type="password" class="form-control">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary">Update Profile</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 </header>

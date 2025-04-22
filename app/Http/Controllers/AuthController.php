@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Auth;
@@ -47,4 +48,24 @@ class AuthController extends Controller
 
         }
     }
+
+    // public function gantiPassword(Request $request)
+    // {
+    //     $request->validate([
+    //         'pass' => 'required',
+    //         'pass1' => 'required|min:6|confirmed',
+    //     ]);
+
+    //     $admin = Auth::guard('admin')->user();
+
+    //     if (!Hash::check($request->pass, $admin->password)) {
+    //         return back()->with('error', 'Password lama tidak cocok.');
+    //     }
+
+    //     // $admin->update([
+    //     //     'password' => Hash::make($request->pass1),
+    //     // ]);z
+
+    //     return back()->with('success', 'Password berhasil diubah.');
+    // }
 }
