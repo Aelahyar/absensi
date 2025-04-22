@@ -87,6 +87,17 @@
             });
         @endif
 
+        @if (session('error'))
+            Swal.fire({
+                title: 'Oops!',
+                text: '{{ session('error') }}',
+                icon: 'error',
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 2500
+            });
+        @endif
 
             // DataTables
             $(document).ready(function() {

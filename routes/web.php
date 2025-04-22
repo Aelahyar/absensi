@@ -43,6 +43,7 @@ Route::middleware(['auth:user'])->group(function(){
 Route::middleware(['auth:admin'])->group(function(){
     Route::get('/logoutadmin', [AuthController::class, 'logoutadmin']);
     Route::get('/dashboardadmin', [DashboardController::class, 'index'])->name('dashboardadmin');
+    Route::post('/update_admin', [DashboardController::class, 'updateprofile'])->name('update.password');
 
     // Route kelas
     Route::controller(App\Http\Controllers\KelasController::class)->group(function () {
@@ -94,11 +95,19 @@ Route::middleware(['auth:admin'])->group(function(){
         Route::delete('/guru/{id_guru}', 'destroy')->name('guru.destroy');
     });
 
-    // Route Guru
+    // Route Kepsek
     Route::controller(App\Http\Controllers\KepsekController::class)->group(function(){
         Route::get('/kepsek', 'index')->name('kepsek.index');
         Route::post('/kepsek', 'store')->name('kepsek.store');
         Route::put('/kepsek/{id_kepsek}', 'update')->name('kepsek.update');
         Route::delete('/kepsek/{id_kepsek}', 'destroy')->name('kepsek.destroy');
+    });
+
+    // Route Siswa
+    Route::controller(App\Http\Controllers\SiswaController::class)->group(function(){
+        Route::get('/siswa', 'index')->name('siswa.index');
+        Route::post('/siswa', 'store')->name('siswa.store');
+        Route::put('/siswa/{id_siswa}', 'update')->name('siswa.update');
+        Route::delete('/siswa/{id_siswa}', 'destroy')->name('siswa.destroy');
     });
 });
