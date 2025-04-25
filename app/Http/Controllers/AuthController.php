@@ -13,9 +13,11 @@ class AuthController extends Controller
 {
     public function login(Request $request)
     {
+        // Logout guard admin agar tidak bentrok
+        Auth::guard('admin')->logout();
+
         if(Auth::guard('user')->attempt(['email' => $request->email, 'password' => $request->password])) {
-            return redirect('/dashboard_user');
-            // return redirect()->route('admin.dashboard');
+            return redirect('/dashboarduser');
         } else {
             return redirect('/')->with(['warning' => 'Email / Password Salah']);
         }
@@ -37,6 +39,9 @@ class AuthController extends Controller
 
     public function loginadmin(Request $request)
     {
+        // Logout guard user agar tidak bentrok
+        Auth::guard('user')->logout();
+
         // $pass = '123';
         // echo Hash::make($pass);
 

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('alamat');
             $table->string('th_angkatan');
             $table->enum('status', ['Y', 'N'])->default('Y');
+            $table->string('pndk');
             $table->unsignedBigInteger('id_mkelas');
             $table->timestamps();
 

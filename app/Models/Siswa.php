@@ -19,9 +19,16 @@ class Siswa extends Model
         'jk',
         'alamat',
         'status',
+        'pndk',
         'th_angkatan',
         'id_mkelas'
     ];
+
+
+    public function logAbsensi()
+    {
+        return $this->hasMany(LogAbsensi::class, 'id_siswa');
+    }
 
     public function kelas()
     {

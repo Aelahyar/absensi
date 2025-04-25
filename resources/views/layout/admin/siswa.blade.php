@@ -105,6 +105,10 @@
                                                         <option value="N">Non-Aktif</option>
                                                     </select>
                                                 </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label><strong>Pondok / Non Pondok</strong></label>
+                                                    <input name="pndk" type="text" placeholder="Masukan Pondok/Non Pondok" class="form-control" required>
+                                                </div>
                                             </div>
 
                                         </div>
@@ -128,6 +132,7 @@
                                             <th class="text-center">Nama Siswa</th>
                                             <th class="text-center">Kelas</th>
                                             <th class="text-center">Tahun Masuk</th>
+                                            <th class="text-center">Pondok/Non</th>
                                             <th class="text-center">Status</th>
                                             <th class="text-center">Opsi</th>
                                         </tr>
@@ -140,6 +145,7 @@
                                                 <td class="text-center">{{ $s->nama_siswa }}</td>
                                                 <td class="text-center">{{ $s->kelas->nama_kelas ?? '-' }}</td>
                                                 <td class="text-center">{{ $s->th_angkatan }}</td>
+                                                <td class="text-center">{{ $s->pndk }}</td>
                                                 <td class="text-center">
                                                     @if ($s->status == 'Y')
                                                         <span class="badge bg-success">Aktif</span>
@@ -257,6 +263,13 @@
                                                                         <option value="Y" {{ old('status', $s->status) == 'Y' ? 'selected' : '' }}>Aktif</option>
                                                                         <option value="N" {{ old('status', $s->status) == 'N' ? 'selected' : '' }}>Non-Aktif</option>
                                                                     </select>
+                                                                </div>
+                                                                <div class="col-md-6 mb-3">
+                                                                    <label><strong>Pondok/Non-Pondok</strong></label>
+                                                                    <input name="pndk" type="text" class="form-control @error('pndk') is-invalid @enderror" value="{{ old('pndk', $s->pndk) }}">
+                                                                    @error('pndk')
+                                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                                    @enderror
                                                                 </div>
                                                             </div>
 

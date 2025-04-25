@@ -25,7 +25,8 @@ class SiswaController extends Controller
             'tgl_lahir' => 'required|date',
             'jk' => 'required|string|max:255',
             'alamat' => 'required|string|max:255',
-            'status' => 'required|in:Y,N'
+            'status' => 'required|in:Y,N',
+            'pndk' => 'required|string|max:255'
         ]);
 
         Siswa::create([
@@ -37,7 +38,8 @@ class SiswaController extends Controller
             'alamat' => $request->alamat,
             'th_angkatan' => $request->th_angkatan,
             'id_mkelas' => $request->id_mkelas,
-            'status' => 'Y',
+            'pndk' => $request->pndk,
+            'status' => 'Y'
         ]);
 
         return redirect()->route('siswa.index')->with('success', 'Data siswa berhasil ditambahkan.');
@@ -86,13 +88,14 @@ class SiswaController extends Controller
             'alamat' => 'nullable|string|max:255',
             'th_angkatan' => 'nullable|string|max:10',
             'id_mkelas' => 'nullable|exists:kelas,id_mkelas',
-            'status' => 'nullable|in:Y,N'
+            'status' => 'nullable|in:Y,N',
+            'pndk' => 'nullable|string|max:255'
         ]);
 
         // Ambil hanya input yang tidak null
         $data = array_filter($request->only([
             'nis', 'nama_siswa', 'tempat_lahir', 'tgl_lahir',
-            'jk', 'alamat', 'th_angkatan', 'id_mkelas', 'status'
+            'jk', 'alamat', 'th_angkatan', 'id_mkelas', 'status', 'pndk'
         ]), function ($value) {
             return !is_null($value);
         });
