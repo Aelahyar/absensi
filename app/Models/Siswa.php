@@ -20,7 +20,6 @@ class Siswa extends Model
         'alamat',
         'status',
         'pndk',
-        'th_angkatan',
         'id_mkelas'
     ];
 

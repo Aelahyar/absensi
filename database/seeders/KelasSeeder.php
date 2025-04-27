@@ -25,5 +25,13 @@ class KelasSeeder extends Seeder
             'kd_kelas' => 'KLS003',
             'nama_kelas' => 'VII C'
         ]);
+        Kelas::create([
+            'kd_kelas' => 'KLS004',
+            'nama_kelas' => 'VII D'
+        ]);
+        Kelas::create([
+            'kd_kelas' => 'KLS005',
+            'nama_kelas' => 'VII E'
+        ]);
     }
 }

@@ -22,11 +22,11 @@
                     <div class="card">
                         {{-- Card Header --}}
                         <div class="card-header">
-                            <h5 class="card-title">
+                            <h3 class="card-title">
                                 <div class="col-sm-12 d-flex justify-content-between">
-                                    Absensi Siswa
+                                    Absensi Siswa - Hari {{ ucfirst(($hariIni))}}, {{$tgl_absen}}
                                 </div>
-                            </h5>
+                            </h3>
                         </div>
 
 
@@ -34,11 +34,12 @@
                         <div class="card-body" style="overflow: auto;">
                             <form action="{{ route('absensi.store') }}" method="POST">
                                 @csrf
-                                <input type="date" name="tgl_absen" value="{{ $tgl_absen }}" class="form-control mb-3" readonly>
+                                <input type="hidden" name="tgl_absen" value="{{ $tgl_absen }}" class="form-control mb-3 text-center" readonly>
 
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
+                                            <th class="text-center">No</th>
                                             <th class="text-center">Nama Siswa</th>
                                             <th class="text-center">Absensi</th>
                                         </tr>
@@ -50,6 +51,7 @@
                                             @endphp
 
                                             <tr>
+                                                <td class="text-center">{{ $loop->iteration }}</td>
                                                 <td class="text-center">
                                                     {{ $siswa->nama_siswa }}
                                                     @if($sudahAbsen)
@@ -61,7 +63,6 @@
 
                                                     @if(!$sudahAbsen)
                                                         <select name="keterangan[{{ $siswa->id_siswa }}]" class="form-control" required>
-                                                            <option value="" class="text-center">-- Pilih Keterangan --</option>
                                                             <option value="H" class="text-center">Hadir</option>
                                                             <option value="I" class="text-center">Izin</option>
                                                             <option value="S" class="text-center">Sakit</option>

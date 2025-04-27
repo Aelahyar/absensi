@@ -53,7 +53,7 @@
                 </li>
                 <li class="sidebar-item {{ Route::is('absensi*') ? 'active' : '' }} has-sub">
                     <a href="#" class='sidebar-link'>
-                        <i class="bi bi-grid-1x2-fill"></i>
+                        <i class="bi bi-clipboard-data-fill"></i>
                         <span>Absensi Siswa</span>
                     </a>
                     <ul class="submenu">
@@ -65,6 +65,12 @@
                             </li>
                         @endforeach
                     </ul>
+                </li>
+                <li class="sidebar-item {{ Route::is('Presensi*') ? 'active' : '' }}">
+                    <a href="{{ route('presensi.guru') }}" class='sidebar-link'>
+                        <i class="bi bi-file-earmark-medical-fill"></i>
+                        <span>Presensi Guru</span>
+                    </a>
                 </li>
 
                 {{-- <li class="sidebar-item {{ Route::is('absensi*') ? 'active' : '' }} has-sub">
@@ -98,9 +104,9 @@
                     </a>
                 </li> --}}
                 <li
-                    class="sidebar-item {{ Route::is('rekapsiswa*') ? 'active' : '' }}  has-sub">
+                    class="sidebar-item {{ Route::is('rekapsiswa*', 'rekapguru*') ? 'active' : '' }}  has-sub">
                     <a href="#" class='sidebar-link'>
-                        <i class="bi bi-hexagon-fill"></i>
+                        <i class="bi bi-clipboard2-check-fill"></i>
                         <span>Rekap Presensi</span>
                     </a>
                     <ul class="submenu ">
@@ -110,18 +116,18 @@
                                 <span>Rekap Siswa</span>
                             </a>
                         </li>
-                        <li class="submenu-item  ">
-                            <a href="form-element-input-group.html" class="submenu-link">Rekap Guru</a>
+                        <li class="submenu-item {{ Route::is('rekapguru*') ? 'active' : '' }} ">
+                            <a href="{{route('rekapguru')}}" class="submenu-link">Rekap Guru</a>
                         </li>
                     </ul>
                 </li>
-                {{-- <li
-                    class="sidebar-item {{ Route::is('rekapsiswa*') ? 'active' : '' }} ">
-                    <a href="{{ route('rekapsiswa', ['kelas' => $kelas->id_mkelas]) }}" class="sidebar-link">
-                        <i class="bi bi-person-badge-fill"></i>
-                        <span>Rekap Siswa</span>
+                <li
+                    class="sidebar-item item active">
+                    <a href="/logout" class='sidebar-link'>
+                        <i class="icon-mid bi bi-box-arrow-left me-2"></i>
+                        <span>Logout</span>
                     </a>
-                </li> --}}
+                </li>
             </ul>
         </div>
     </div>

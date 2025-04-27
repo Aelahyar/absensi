@@ -19,7 +19,7 @@ return new class extends Migration
             $table->date('tgl_lahir');
             $table->enum('jk', ['Laki-laki', 'Perempuan']);
             $table->string('alamat');
-            $table->string('th_angkatan');
+            // $table->string('th_angkatan');
             $table->enum('status', ['Y', 'N'])->default('Y');
             $table->string('pndk');
             $table->unsignedBigInteger('id_mkelas');
