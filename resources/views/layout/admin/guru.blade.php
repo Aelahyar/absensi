@@ -122,7 +122,6 @@
                                                         <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editGuru{{ $g->id_guru }}">
                                                             <i class="bi bi-pencil-square"></i>
                                                         </button>
-
                                                         {{-- Tombol Delete --}}
                                                         <form id="deleteForm{{ $g->id_guru }}" action="{{ route('guru.destroy', $g->id_guru) }}" method="POST">
                                                             @csrf

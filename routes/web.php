@@ -110,4 +110,14 @@ Route::middleware(['auth:admin'])->group(function(){
         Route::put('/siswa/{id_siswa}', 'update')->name('siswa.update');
         Route::delete('/siswa/{id_siswa}', 'destroy')->name('siswa.destroy');
     });
+
+    // Route Jadwal Pelajaran
+    Route::controller(App\Http\Controllers\JadwalAjarController::class)->group(function(){
+        Route::get('/jadwalajar', 'index')->name('jadwalajar.index');
+        Route::get('/jadwalajar/create', 'create')->name('jadwalajar.create');
+        Route::post('/jadwalajar', 'store')->name('jadwalajar.store');
+        Route::get('/jadwalajar/edit/{id_mengajar}', 'edit')->name('jadwalajar.edit');
+        Route::put('/jadwalajar/update/{id_mengajar}', 'update')->name('jadwalajar.update');
+        Route::delete('/jadwalajar/{id_mengajar}', 'destroy')->name('jadwalajar.destroy');
+    });
 });
