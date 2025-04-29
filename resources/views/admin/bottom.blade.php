@@ -75,21 +75,21 @@
                         </li>
                     </ul>
                 </li>
-                <li
-                    class="sidebar-item  has-sub">
+                <li class="sidebar-item item {{ Route::is(['jadwalajar.*']) ? 'active' : '' }} has-sub">
                     <a href="#" class='sidebar-link'>
-                        <i class="bi bi-hexagon-fill"></i>
+                        <i class="bi bi-calendar2-week-fill"></i>
                         <span>Jadwal Mengajar</span>
                     </a>
-                    <ul class="submenu ">
-                        <li class="submenu-item  ">
-                            <a href="form-element-input.html" class="submenu-link">Tambah Jadwal</a>
+                    <ul class="submenu">
+                        <li class="submenu-item item {{ Route::is('jadwalajar.index') || Route::is('jadwalajar.edit') ? 'active' : '' }}">
+                            <a href="{{ route('jadwalajar.index') }}" class="submenu-link">Daftar Jadwal</a>
                         </li>
-                        <li class="submenu-item  ">
-                            <a href="form-element-input-group.html" class="submenu-link">Daftar Mengajar</a>
+                        <li class="submenu-item item {{ Route::is('jadwalajar.create') ? 'active' : '' }}">
+                            <a href="{{ route('jadwalajar.create') }}" class="submenu-link">Tambah Jadwal</a>
                         </li>
                     </ul>
                 </li>
+
                 <li
                     class="sidebar-item {{ Route::is('kepsek*') ? 'active' : '' }} ">
                     <a href="{{ Route('kepsek.index') }}" class="sidebar-link">
@@ -130,102 +130,3 @@
         </div>
     </div>
 </div>
-
-<header>
-    <nav class="navbar navbar-expand navbar-light navbar-top">
-        <div class="container-fluid">
-            <a href="#" class="burger-btn d-block d-xl-none">
-                <i class="bi bi-justify fs-3"></i>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto mb-lg-0">
-
-                </ul>
-                <div class="dropdown">
-                    <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                        <div class="user-menu d-flex">
-                            <div class="user-name text-end me-3">
-                                <h6 class="mb-0 text-gray-600">{{ Auth::guard('admin')->user()->nama_lengkap}}</h6>
-                                <p class="mb-0 text-sm text-gray-600">Administrator</p>
-                            </div>
-                            <div class="user-img d-flex align-items-center">
-                                <div class="avatar avatar-md">
-                                    <img src="./assets/compiled/jpg/1.jpg">
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton" style="min-width: 11rem;">
-                        <li>
-                            <h6 class="dropdown-header">Hello, Anwar!</h6>
-                        </li>
-                        <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-person me-2"></i> My
-                                Profile</a></li>
-                                <li>
-                                    <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#gantiPassword">
-                                        <i class="icon-mid bi bi-gear me-2"></i> Settings
-                                    </a>
-                                </li>
-                                <hr class="dropdown-divider">
-                        <li><a class="dropdown-item" href="/logoutadmin"><i
-                                    class="icon-mid bi bi-box-arrow-left me-2"></i> Logout</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Modal Ganti Password -->
-    <div class="modal fade" id="gantiPassword" tabindex="-1" role="dialog" aria-labelledby="gantiPass" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-                <form method="POST" action="{{ route('update.password') }}">
-                    @csrf
-                    <div class="modal-header">
-                        <h4 class="modal-title">Update Akun</h4>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        {{-- @if(session('success'))
-                            <div class="alert alert-success">{{ session('success') }}</div>
-                        @endif
-                        @if(session('error'))
-                            <div class="alert alert-danger">{{ session('error') }}</div>
-                        @endif --}}
-
-                        <div class="form-group mb-3">
-                            <label>Nama Lengkap</label>
-                            <input name="nama_lengkap" type="text" class="form-control" required>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label>Username</label>
-                            <input name="username" type="text" class="form-control" required>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label>Password Lama</label>
-                            <input name="pass" type="password" class="form-control" required>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label>Password Baru</label>
-                            <input name="pass1" type="password" class="form-control">
-                        </div>
-                        <div class="form-group mb-3">
-                            <label>Konfirmasi Password Baru</label>
-                            <input name="pass1_confirmation" type="password" class="form-control">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                        <button type="submit" class="btn btn-primary">Update Profile</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-</header>
