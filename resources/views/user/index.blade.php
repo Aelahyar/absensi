@@ -1,16 +1,16 @@
-@extends('admin.home')
+@extends('user.userhome')
 @section('content')
 <div class="page-heading">
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
                 <h3>Administrator</h3>
-                <p class="text-subtitle text-muted">Selamat Datang {{ Auth::guard('admin')->user()->nama_lengkap}} | Aplikasi Absensi Siswa</p>
+                <p class="text-subtitle text-muted">Selamat Datang {{ Auth::guard('user')->user()->name}} | Aplikasi Absensi Siswa</p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/dashboardadmin">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="{{ Route('dashboarduser') }}">Dashboard</a></li>
                     </ol>
                 </nav>
             </div>
@@ -20,9 +20,6 @@
         <div class="row">
             <div class="col-12 col-lg-8">
                 <div class="card">
-                    {{-- <div class="card-header">
-                        <h4>Profile Visit</h4>
-                    </div> --}}
                     <div class="card-body">
                         <center>
                             <img src="{{ asset('assets/img/mts.png')}}" alt="MTs" width="150">
@@ -45,28 +42,28 @@
                         <h4>Aplikasi Absensi</h4>
                     </div>
                     <div class="card-body">
-                    <p>Selamat datang {{ Auth::guard('admin')->user()->name }} di Aplikasi absensi siswa ini, Semoga harimu menyenangkan.</p>
+                    <p>Selamat datang {{ Auth::guard('user')->user()->name }} di Aplikasi absensi siswa ini, Semoga harimu menyenangkan.</p>
                     <div class="accordion accordion-flush" id="accordionFlushExample">
-                        <div class="accordion-item">
+                        {{-- <div class="accordion-item">
                             <h2 class="accordion-header" id="flush-headingOne">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                <strong>Data Guru</strong>
+                                <strong>Absensi</strong>
                                 </button>
                             </h2>
                             <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                                <div class="accordion-body">Total guru ada {{$guru}}</div>
+                                <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
                             </div>
                         </div>
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="flush-headingTwo">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                                    <strong>Data Siswa</strong>
+                                    <strong>Rekap</strong>
                                 </button>
                             </h2>
                             <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                                <div class="accordion-body">Total siswa ada {{$siswa}}</div>
+                                <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="flush-headingThree">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">

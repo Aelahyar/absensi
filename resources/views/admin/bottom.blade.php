@@ -111,7 +111,7 @@
                         <span>Data Siswa</span>
                     </a>
                 </li>
-                <li
+                {{-- <li
                     class="sidebar-item  has-sub">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-clipboard2-check-fill"></i>
@@ -125,6 +125,13 @@
                             <a href="form-element-input-group.html" class="submenu-link">VIII</a>
                         </li>
                     </ul>
+                </li> --}}
+                <li
+                    class="sidebar-item item active">
+                    <a href="/logoutadmin" class='sidebar-link'>
+                        <i class="icon-mid bi bi-box-arrow-left me-2"></i>
+                        <span>Logout</span>
+                    </a>
                 </li>
             </ul>
         </div>

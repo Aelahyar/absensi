@@ -4,6 +4,7 @@ use App\Http\Controllers\KelasController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DashboardUserController;
 use App\Http\Controllers\TahunAjaranController;
 use App\Http\Controllers\AdminAuthController;
 
@@ -35,13 +36,38 @@ Route::middleware(['guest:admin'])->group(function(){
     Route::post('/admin/login', [AuthController::class, 'loginadmin']);
 });
 
+// Route user
 Route::middleware(['auth:user'])->group(function(){
     Route::get('/logout', [AuthController::class, 'logout']);
-    Route::get('/dashboarduser', [DashboardController::class, 'index'])->name('dashboarduser');
+    Route::get('/dashboarduser', [DashboardUserController::class, 'index'])->name('dashboarduser');
+    Route::post('/update_user', [DashboardUserController::class, 'updateprofile'])->name('update.user');
+
+    // Route Absensi Siswa
+    Route::controller(App\Http\Controllers\AbsensiController::class)->group(function(){
+        Route::get('/absensi/{kelas}', 'index')->name('absensi.index');
+        Route::post('/absensi', 'store')->name('absensi.store');
+    });
+
+    // Route Absensi guru
+    Route::controller(App\Http\Controllers\AbsensiController::class)->group(function(){
+        Route::get('/absensi_guru', 'indexguru')->name('presensi.guru');
+        Route::post('/absensi_guru', 'storeguru')->name('presensi.store');
+    });
+
+    // Route Rekap absensi
+    Route::controller(App\Http\Controllers\RekapController::class)->group(function(){
+        Route::get('/rekapsiswa', 'index')->name('rekapsiswa');
+    });
+
+    // Route Rekap Presensi
+    Route::controller(App\Http\Controllers\RekapController::class)->group(function(){
+        Route::get('/rekapguru', 'rekap')->name('rekapguru');
+    });
 });
 
+// Route admin
 Route::middleware(['auth:admin'])->group(function(){
-    Route::get('/logoutadmin', [AuthController::class, 'logoutadmin']);
+    Route::get('/logoutadmin', [AuthController::class, 'logoutadmin'])->name('logoutadmin');
     Route::get('/dashboardadmin', [DashboardController::class, 'index'])->name('dashboardadmin');
     Route::post('/update_admin', [DashboardController::class, 'updateprofile'])->name('update.password');
 
