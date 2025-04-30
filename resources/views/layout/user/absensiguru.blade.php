@@ -60,14 +60,14 @@
                                                 @endphp
                                                 <tr>
                                                     <td class="text-center">{{ $mengajar->jamke }}</td>
-                                                    <td class="text-center">{{ $mengajar->waktu }}</td>
+                                                    <td class="text-center">{{ $mengajar->jam_mengajar }}</td>
                                                     <td class="text-center">{{ $mengajar->guru->nama_guru ?? '-' }}</td>
                                                     <td class="text-center">{{ $mengajar->mapel->mapel ?? '-' }}</td>
                                                     <td class="text-center">
                                                         @if($sudahAbsen)
                                                             <span class="badge bg-success">Sudah Absen</span>
                                                         @else
-                                                            <select name="absen[{{ $mengajar->id_mengajar }}]" class="form-select" required>
+                                                            <select name="absen[{{ $mengajar->id_mengajar }}]" class="form-select  absen-select" required>
                                                                 <option value="">-- Pilih --</option>
                                                                 <option value="hadir">Hadir</option>
                                                                 <option value="izin">Izin</option>
@@ -83,9 +83,10 @@
                                 </div>
                             </div>
 
-            <div class="text-center my-4">
-                <button type="button" id="btnSimpanAbsensi" class="btn btn-success">Simpan Absensi</button>
-            </div>
+                            <div class="text-center my-4 ">
+                                <button type="button" class="btn btn-success btnSimpanAbsensi" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Pastikan semua guru sudah di Absen">Simpan Absensi</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -99,26 +100,73 @@
 @push('scripts')
 <script>
 // Karena banyak form, kita target semua tombol dengan id sama
-document.querySelectorAll('#btnSimpanAbsensi').forEach(function(button) {
-        button.addEventListener('click', function(event) {
-            event.preventDefault();
+// document.querySelectorAll('#btnSimpanAbsensi').forEach(function(button) {
+//         button.addEventListener('click', function(event) {
+//             event.preventDefault();
 
+//             Swal.fire({
+//                 title: 'Simpan Absensi?',
+//                 text: "Pastikan data sudah benar.",
+//                 icon: 'question',
+//                 showCancelButton: true,
+//                 confirmButtonColor: '#28a745',
+//                 cancelButtonColor: '#d33',
+//                 confirmButtonText: 'Ya, Simpan!',
+//                 cancelButtonText: 'Batal'
+//             }).then((result) => {
+//                 if (result.isConfirmed) {
+//                     // Ambil form terdekat dari tombol yang diklik
+//                     event.target.closest('form').submit();
+//                 }
+//             });
+//         });
+//     });
+document.addEventListener('DOMContentLoaded', function () {
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    }, false);
+document.querySelectorAll('.btnSimpanAbsensi').forEach(function (button) {
+    button.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        let form = event.target.closest('form');
+        let selects = form.querySelectorAll('select[name^="absen["]:not([disabled])');
+        let valid = true;
+
+        selects.forEach(function (select) {
+            if (select.value === '') {
+                valid = false;
+            }
+        });
+
+        if (!valid) {
             Swal.fire({
-                title: 'Simpan Absensi?',
-                text: "Pastikan data sudah benar.",
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonColor: '#28a745',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya, Simpan!',
-                cancelButtonText: 'Batal'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Ambil form terdekat dari tombol yang diklik
-                    event.target.closest('form').submit();
-                }
+                title: 'Oops!',
+                text: 'Semua Guru di kelas ini harus sudah Presensi.',
+                icon: 'warning',
+                confirmButtonText: 'Oke'
             });
+            return;
+        }
+
+        Swal.fire({
+            title: 'Simpan Absensi?',
+            text: "Pastikan data sudah benar.",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#28a745',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Simpan!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
         });
     });
+});
+
 </script>
 @endpush

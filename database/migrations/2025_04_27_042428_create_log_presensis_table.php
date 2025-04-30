@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('tanggal');
             $table->timestamps();
 
-            $table->foreign('id_mengajar')->references('id_mengajar')->on('mengajars')->onDelete('cascade');
+            $table->foreign('id_mengajar')->references('id_mengajar')->on('jadwal_ajars')->onDelete('cascade');
         });
     }
 

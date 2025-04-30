@@ -6,7 +6,7 @@ use App\Models\LogPresensi;
 use App\Models\Siswa;
 use App\Models\LogAbsensi;
 use Illuminate\Http\Request;
-use App\Models\Mengajar;
+use App\Models\JadwalAjar;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Exception;
@@ -57,10 +57,10 @@ class AbsensiController extends Controller
     {
         $hariIni = Carbon::now()->locale('id')->isoFormat('dddd'); // Misal: 'Senin', 'Selasa'
 
-        $mengajars = Mengajar::with(['guru', 'mapel', 'kelas'])
+        $mengajars = JadwalAjar::with(['guru', 'mapel', 'kelas'])
             ->where('hari', $hariIni)
-            ->orderBy('id_mkelas')
-            ->orderBy('waktu')
+            ->orderBy('id_kelas')
+            ->orderBy('jam_mengajar')
             ->get()
             ->groupBy('kelas.nama_kelas'); // kelompokkan per kelas
 

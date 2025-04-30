@@ -19,8 +19,8 @@ class DashboardController extends Controller
         return view('admin.dashboard', compact('guru', 'siswa'));
         // dd(Auth::guard('admin')->user()); // cek apakah admin benar-benar login
     }
-
-    public function updateprofile(Request $request){
+    public function updateprofile(Request $request)
+    {
         $request->validate([
             'nama_lengkap' => 'required|string|max:255',
             'username' => 'required|string|max:255',
@@ -32,27 +32,32 @@ class DashboardController extends Controller
         $nama_lengkap = $request->nama_lengkap;
         $password = Auth::guard('admin')->user();
 
-        // Verifikasi password lama
         if (!Hash::check($request->pass, $password->password)) {
             return back()->with('error', 'Password lama salah');
         }
 
-        // Siapkan data untuk update
         $data = [
             'nama_lengkap' => $request->nama_lengkap,
             'username' => $request->username,
         ];
 
-        // Update password jika password baru diisi
         if (!empty($request->pass1)) {
             $data['password'] = Hash::make($request->pass1);
         }
 
-        $update = DB::table('admin')->where('username', $username)->update($data);
-        if ($update) {
+        DB::beginTransaction();
+        try {
+            $update = DB::table('admin')->where('username', $username)->update($data);
+
+            if (!$update) {
+                throw new \Exception("Gagal mengupdate data admin.");
+            }
+
+            DB::commit();
             return redirect()->back()->with('success', 'Data berhasil diupdate');
-        } else {
-            return redirect()->back()->with('error', 'Data gagal diupdate');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Gagal mengupdate profil: ' . $e->getMessage());
         }
     }
 }
