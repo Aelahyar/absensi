@@ -18,6 +18,6 @@ class LogPresensi extends Model
 
     public function mengajar()
     {
-        return $this->belongsTo(Mengajar::class, 'id_mengajar', 'id_mengajar');
+        return $this->belongsTo(JadwalAjar::class, 'id_mengajar', 'id_mengajar');
     }
 }

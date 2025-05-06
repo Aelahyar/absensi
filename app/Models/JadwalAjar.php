@@ -35,4 +35,13 @@ class JadwalAjar extends Model
     {
         return $this->belongsTo(Kelas::class, 'id_kelas', 'id_mkelas');
     }
+    public function semester()
+    {
+        return $this->belongsTo(Semester::class, 'id_semester', 'id_semester');
+    }
+
+    public function thAjaran()
+    {
+        return $this->belongsTo(TahunAjaran::class, 'id_thajaran', 'id_thajaran');
+    }
 }

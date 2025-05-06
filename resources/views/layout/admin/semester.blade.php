@@ -109,7 +109,7 @@
                                                     {{-- Edit --}}
                                                     <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
                                                         data-bs-target="#editSemester{{ $smt->id_semester }}">
-                                                        <i class="bi bi-pencil-square"></i> Edit
+                                                        <i class="bi bi-pencil-square"></i> Update
                                                     </button>
 
                                                     {{-- Delete --}}

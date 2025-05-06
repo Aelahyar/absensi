@@ -60,6 +60,7 @@ class RekapController extends Controller
         }
 
         $rekapAbsensi = $query->get();
+        // dd($rekapAbsensi);
 
         return view('layout.user.rekapguru', compact('rekapAbsensi'));
     }
