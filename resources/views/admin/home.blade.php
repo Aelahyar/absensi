@@ -168,16 +168,18 @@
             <footer>
                 <div class="footer clearfix mb-0 text-muted">
                     <div class="float-start">
-                        <p>2025 &copy; Big Family</p>
+                        <p><span id="year"></span> &copy; Theta</p>
                     </div>
                     <div class="float-end">
                         <p>Crafted with <span class="text-danger"><i class="bi bi-heart-fill icon-mid"></i></span>
-                            by <a href="https://saugi.me">Big Family</a></p>
+                            by <a href="https://www.instagram.com/theta_dev">Theta</a></p>
                     </div>
                 </div>
             </footer>
         </div>
     </div>
+
+    <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <script src="{{asset('assets/extensions/select2/js/select2.min.js')}}"></script>
 
