@@ -136,19 +136,19 @@
                                         @forelse($siswa as $i => $s)
                                             <tr>
                                                 <td class="text-center">{{ $i + 1 }}</td>
-                                                <td class="text-center">{{ $s->nis }}</td>
+                                                <td class="text-start">{{ $s->nis }}</td>
                                                 <td>{{ $s->nama_siswa }}</td>
-                                                <td class="text-center">{{ $s->kelas->nama_kelas ?? '-' }}</td>
-                                                <td class="text-center">{{ $s->pndk }}</td>
-                                                <td class="text-center">
+                                                <td class="text-start">{{ $s->kelas->nama_kelas ?? '-' }}</td>
+                                                <td class="text-start">{{ $s->pndk }}</td>
+                                                <td class="text-start">
                                                     @if ($s->status == 'Y')
                                                         <span class="badge bg-success">Aktif</span>
                                                     @else
                                                         <span class="badge bg-danger">Non-Aktif</span>
                                                     @endif
                                                 </td>
-                                                <td class="text-center">
-                                                    <div class="d-flex justify-content-center gap-1">
+                                                <td class="text-start">
+                                                    <div class="d-flex justify-content-start gap-1">
                                                         {{-- Tombol Edit --}}
                                                         <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editSiswa{{ $s->id_siswa }}">
                                                             <i class="bi bi-pencil-square"></i>

@@ -106,18 +106,18 @@
                                         @forelse($guru as $i => $g)
                                             <tr>
                                                 <td class="text-center">{{ $i + 1 }}</td>
-                                                <td class="text-center">{{ $g->nik }}</td>
-                                                <td class="text-center">{{ $g->nama_guru }}</td>
-                                                <td class="text-center">{{ $g->email }}</td>
-                                                <td class="text-center">
+                                                <td class="text-start">{{ $g->nik }}</td>
+                                                <td class="text-start">{{ $g->nama_guru }}</td>
+                                                <td class="text-start">{{ $g->email }}</td>
+                                                <td class="text-start">
                                                     @if($g->status == 'Y')
                                                         <span class="badge bg-success">Aktif</span>
                                                     @else
                                                         <span class="badge bg-danger">Non-Aktif</span>
                                                     @endif
                                                 </td>
-                                                <td class="text-center">
-                                                    <div class="d-flex justify-content-center gap-1">
+                                                <td class="text-start">
+                                                    <div class="d-flex justify-content-start gap-1">
                                                         {{-- Tombol Edit --}}
                                                         <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editGuru{{ $g->id_guru }}">
                                                             <i class="bi bi-pencil-square"></i>

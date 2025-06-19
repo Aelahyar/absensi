@@ -7,7 +7,7 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/dashboardadmin">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Rekap Guru</li>
+                        <li class="breadcrumb-item active" aria-current="page">Rekapitulasi Guru</li>
                     </ol>
                 </nav>
             </div>
@@ -23,7 +23,7 @@
                         <div class="card-header">
                             <h5 class="card-title">
                                 <div class="col-sm-12 d-flex justify-content-between">
-                                    Rekap Absensi Guru (Tidak Hadir)
+                                    Rekapitulasi Absensi Guru (Tidak Hadir)
                                 </div>
                             </h5>
                         </div>

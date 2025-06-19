@@ -22,7 +22,7 @@
     </div>
 
     @foreach($mengajars as $namaKelas => $listMengajar)
-        <form action="{{ route('presensi.store') }}" method="POST">
+        <form id="form-{{ Str::slug($namaKelas) }}" action="{{ route('presensi.store') }}" method="POST">
         @csrf
             <section class="section">
                 <div class="col-md-12">
@@ -48,7 +48,7 @@
                                                     <th class="text-center">Waktu</th>
                                                     <th class="text-center">Guru</th>
                                                     <th class="text-center">Mata Pelajaran</th>
-                                                    <th class="text-center">Absen</th>
+                                                    <th class="text-center">Status Presensi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -68,7 +68,6 @@
                                                             <span class="badge bg-success">Sudah Absen</span>
                                                         @else
                                                             <select name="absen[{{ $mengajar->id_mengajar }}]" class="form-select  absen-select" required>
-                                                                <option value="">-- Pilih --</option>
                                                                 <option value="hadir">Hadir</option>
                                                                 <option value="izin">Izin</option>
                                                                 <option value="alpha">Alpha</option>
@@ -84,8 +83,8 @@
                             </div>
 
                             <div class="text-center my-4 ">
-                                <button type="button" class="btn btn-success btnSimpanAbsensi" data-bs-toggle="tooltip" data-bs-placement="top"
-                                title="Pastikan semua guru sudah di Absen">Simpan Absensi</button>
+                                <input type="hidden" name="anchor" value="#form-{{ Str::slug($namaKelas) }}">
+                                <button type="button" class="btn btn-success btnSimpanAbsensi">Simpan Absensi</button>
                             </div>
                         </div>
                     </div>

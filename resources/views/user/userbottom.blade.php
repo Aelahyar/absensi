@@ -54,7 +54,7 @@
                 <li class="sidebar-item {{ Route::is('absensi*') ? 'active' : '' }} has-sub">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-clipboard-data-fill"></i>
-                        <span>Absensi Siswa</span>
+                        <span>Presensi Siswa</span>
                     </a>
                     <ul class="submenu">
                         @foreach ($kelasList as $kelas)
@@ -66,7 +66,7 @@
                         @endforeach
                     </ul>
                 </li>
-                <li class="sidebar-item {{ Route::is('Presensi*') ? 'active' : '' }}">
+                <li class="sidebar-item {{ Route::is('presensi*') ? 'active' : '' }}">
                     <a href="{{ route('presensi.guru') }}" class='sidebar-link'>
                         <i class="bi bi-file-earmark-medical-fill"></i>
                         <span>Presensi Guru</span>

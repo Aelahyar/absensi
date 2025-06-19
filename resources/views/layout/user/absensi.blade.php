@@ -41,7 +41,8 @@
                                         <tr>
                                             <th class="text-center">No</th>
                                             <th class="text-center">Nama Siswa</th>
-                                            <th class="text-center">Absensi</th>
+                                            <th class="text-center">Pondok Non Pondok</th>
+                                            <th class="text-center">Status Presensi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -52,12 +53,13 @@
 
                                             <tr>
                                                 <td class="text-center">{{ $loop->iteration }}</td>
-                                                <td class="text-center">
+                                                <td class="text-start">
                                                     {{ $siswa->nama_siswa }}
                                                     @if($sudahAbsen)
-                                                        <span class="badge bg-success text-center text-white">Sudah absen</span>
+                                                        <i class="bi bi-check-lg text-info"></i>
                                                     @endif
                                                 </td>
+                                                <td class="text-center">{{ $siswa->pndk }}</td>
                                                 <td>
                                                     <input type="hidden" name="id_siswa[]" value="{{ $siswa->id_siswa }}">
 

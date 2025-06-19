@@ -88,7 +88,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <label for="jamke" class="form-label">Jam Ke</label>
-                                            <input type="text" class="form-control" id="jamke" name="jamke">
+                                            <input type="number" class="form-control" id="jamke" name="jamke">
                                         </div>
                                         <div class="col-md-4">
                                             <label for="waktu" class="form-label">Waktu</label>
@@ -147,6 +147,74 @@
 
 @push('scripts')
 <script>
+    const durasi = 40; // menit
+    let waktuTerakhirPerHari = {};
+    let hariSebelumnya = "";
+
+    function formatWaktu(totalMenit) {
+        const jam = Math.floor(totalMenit / 60);
+        const menit = totalMenit % 60;
+        return jam.toString().padStart(2, '0') + ':' + menit.toString().padStart(2, '0');
+    }
+
+    function waktuKeMenit(waktu) {
+        const [jam, menit] = waktu.split(':').map(Number);
+        return jam * 60 + menit;
+    }
+
+    function setWaktu(jamke) {
+        const hari = document.getElementById('hari').value;
+        const jamMulaiInput = document.getElementById('jam_mulai');
+        const jamSelesaiInput = document.getElementById('jam_selesai');
+
+        if (!hari || jamke < 1 || jamke > 8) return;
+
+        // Reset jika hari berganti
+        if (hari !== hariSebelumnya) {
+            hariSebelumnya = hari;
+            waktuTerakhirPerHari[hari] = "07:00"; // reset waktu awal per hari
+        }
+
+        // Ambil jam mulai dari jam sebelumnya (jika jamke > 1)
+        let jamMulai = waktuTerakhirPerHari[hari];
+
+        // Jika user sebelumnya pernah mengedit jamke sebelumnya, ambil jam_selesai terbaru
+        if (jamke > 1 && waktuTerakhirPerHari[hari]) {
+            jamMulai = waktuTerakhirPerHari[hari];
+        }
+
+        const mulaiMenit = waktuKeMenit(jamMulai);
+        const selesaiMenit = mulaiMenit + durasi;
+
+        const hasilJamMulai = formatWaktu(mulaiMenit);
+        const hasilJamSelesai = formatWaktu(selesaiMenit);
+
+        jamMulaiInput.value = hasilJamMulai;
+        jamSelesaiInput.value = hasilJamSelesai;
+
+        // Simpan jam_selesai ke memori per hari
+        waktuTerakhirPerHari[hari] = hasilJamSelesai;
+    }
+
+    document.getElementById('jamke').addEventListener('input', function () {
+        const jamke = parseInt(this.value);
+        setWaktu(jamke);
+    });
+
+    document.getElementById('hari').addEventListener('change', function () {
+        const jamke = parseInt(document.getElementById('jamke').value);
+        setWaktu(jamke);
+    });
+
+    // Tambahkan pemantauan perubahan jam_selesai manual (user edit)
+    document.getElementById('jam_selesai').addEventListener('input', function () {
+        const hari = document.getElementById('hari').value;
+        if (hari) {
+            waktuTerakhirPerHari[hari] = this.value;
+        }
+    });
+
+
     function generateKodePel() {
         let now = new Date();
         let kode = 'MPL-' +

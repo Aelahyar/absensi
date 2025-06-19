@@ -49,7 +49,7 @@
                                             <label><strong>NIK</strong></label>
                                                 <div class="form-group">
                                                         <input name="nik" type="text" class="form-control @error('nik') is-invalid @enderror"
-                                                            placeholder="Nomer Induk Keluarga" value="{{ old('nik') }}" required>
+                                                            placeholder="Nomer Induk Kependudukan" value="{{ old('nik') }}" required>
                                                             @error('nik')
                                                                 <div class="invalid-feedback">{{ $message }}</div>
                                                             @enderror

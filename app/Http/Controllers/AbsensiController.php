@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\JadwalAjar;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Exception;
 
 class AbsensiController extends Controller
@@ -62,7 +63,8 @@ class AbsensiController extends Controller
             ->orderBy('id_kelas')
             ->orderBy('jam_mengajar')
             ->get()
-            ->groupBy('kelas.nama_kelas'); // kelompokkan per kelas
+            ->groupBy('kelas.nama_kelas')
+            ->sortKeysUsing('strnatcmp');
 
             // dd($mengajars);
 
@@ -75,6 +77,7 @@ class AbsensiController extends Controller
         $dataAbsen = $request->input('absen');
         $tanggalHariIni = Carbon::now()->toDateString();
         $jumlahDisimpan = 0;
+        $anchor = ltrim($request->input('anchor'), '#');
 
         DB::beginTransaction(); // Mulai transaksi database
 
@@ -96,15 +99,21 @@ class AbsensiController extends Controller
 
             if ($jumlahDisimpan > 0) {
                 DB::commit(); // Simpan transaksi
-                return redirect()->back()->with('success', 'Absensi guru berhasil disimpan!');
+                return redirect()->back()
+                ->with('success', 'Absensi guru berhasil disimpan!')
+                ->withFragment($anchor);
             } else {
                 DB::rollBack(); // Tidak ada yang disimpan, rollback
-                return redirect()->back()->with('error', 'Semua guru sudah absen hari ini, tidak ada data baru disimpan.');
+                return redirect()->back()
+                ->with('error', 'Semua guru sudah absen hari ini, tidak ada data baru disimpan.')
+                ->withFragment($anchor);
             }
 
         } catch (Exception $e) {
             DB::rollBack(); // Ada error, rollback
-            return redirect()->back()->with('error', 'Gagal menyimpan absensi: ' . $e->getMessage());
+            return redirect()->back()
+            ->with('error', 'Gagal menyimpan absensi: ' . $e->getMessage())
+            ->withFragment($anchor);
         }
     }
 

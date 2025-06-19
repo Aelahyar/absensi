@@ -7,7 +7,7 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/dashboardadmin">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Rekap Siswa</li>
+                        <li class="breadcrumb-item active" aria-current="page">Rekapitulasi Siswa</li>
                     </ol>
                 </nav>
             </div>
@@ -23,7 +23,7 @@
                         <div class="card-header">
                             <h5 class="card-title">
                                 <div class="col-sm-12 d-flex justify-content-between">
-                                    Rekap Absensi Siswa (Tidak Hadir)
+                                    Rekapitulasi Absensi Siswa (Tidak Hadir)
                                 </div>
                             </h5>
                         </div>
@@ -52,6 +52,8 @@
                                             <tr>
                                                 <th class="text-center">Kelas</th>
                                                 <th class="text-center">Nama Siswa</th>
+                                                <th class="text-center">Jenis Kelamin</th>
+                                                <th class="text-center">Pondok Non Pondok</th>
                                                 <th class="text-center">Tanggal</th>
                                                 <th class="text-center">Keterangan</th>
                                             </tr>
@@ -61,6 +63,8 @@
                                                 <tr>
                                                     <td>{{ $item->siswa->kelas->nama_kelas ?? 'Tanpa Kelas' }}</td>
                                                     <td>{{ $item->siswa->nama_siswa ?? '-' }}</td>
+                                                    <td>{{ $item->siswa->jk }}</td>
+                                                    <td>{{ $item->siswa->pndk }}</td>
                                                     <td>{{ \Carbon\Carbon::parse($item->tgl_absen)->format('d-m-Y') }}</td>
                                                     <td>{{ $item->keterangan }}</td>
                                                 </tr>
