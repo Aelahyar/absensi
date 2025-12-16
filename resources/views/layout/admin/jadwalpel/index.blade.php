@@ -25,6 +25,7 @@
                             <h5 class="card-title">
                                 <div class="col-sm-12 d-flex justify-content-between">
                                     Data Jadwal Pelajaran
+                                    <h3 style="display: none; text-align: center;" id="judul-halaman">Jadwal Pelajaran MTs MA Al-Anwar</h3>
                                     <button type="button" onclick="redirectToPage()"
                                         class="btn btn-outline-success rounded-pill">
                                         <strong>Add Data</strong>
@@ -43,7 +44,7 @@
                                             <th class="text-center">Nama Guru</th>
                                             <th class="text-center">Mata Pelajaran</th>
                                             <th class="text-center">Kelas</th>
-                                            <th class="text-center">TP/Semester</th>
+                                            <th class="text-center">Jam-ke</th>
                                             <th class="text-center">Aksi</th>
                                         </tr>
                                     </thead>
@@ -51,10 +52,10 @@
                                         @forelse($jadwalajar as $item)
                                             <tr>
                                                 <td class="text-center">{{ $loop->iteration }}</td>
-                                                <td class="text-center">{{ $item->guru->nama_guru ?? '-' }}</td>
-                                                <td class="text-center">{{ $item->mapel->mapel ?? '-' }}</td>
+                                                <td class="text-start">{{ $item->guru->nama_guru ?? '-' }}</td>
+                                                <td class="text-start">{{ $item->mapel->mapel ?? '-' }}</td>
                                                 <td class="text-center">{{ $item->kelas->nama_kelas ?? '-' }}</td>
-                                                <td class="text-center">{{ $item->id_semester }}</td>
+                                                <td class="text-center">{{ $item->jamke }}</td>
                                                 <td class="text-center">
                                                     <div class="d-flex justify-content-center gap-1">
                                                         {{-- Tombol Edit --}}

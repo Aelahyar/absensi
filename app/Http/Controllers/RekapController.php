@@ -46,11 +46,8 @@ class RekapController extends Controller
     public function rekap(Request $request)
     {
         // Ambil data absensi guru dengan relasi mengajar, guru, mapel, dan kelas
-        // $rekapAbsensi = LogPresensi::with(['mengajar.guru', 'mengajar.mapel', 'mengajar.kelas'])
-        //     ->orderBy('created_at', 'desc')
-        //     ->get();
         $query = LogPresensi::with(['mengajar.guru', 'mengajar.mapel', 'mengajar.kelas'])
-        ->whereIn('status', ['izin', 'alpha'])
+        ->whereIn('status', ['izinD', 'izinT', 'alpa'])
         ->orderBy('created_at', 'desc');
         // ->get();
 
@@ -63,5 +60,22 @@ class RekapController extends Controller
         // dd($rekapAbsensi);
 
         return view('layout.user.rekapguru', compact('rekapAbsensi'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:izinD,izinT,alpa,hadir', // validasi sesuai pilihan status yang tersedia
+        ]);
+
+        // $log = LogPresensi::findOrFail($id);
+        $log = LogPresensi::where('id', $id)->firstOrFail();
+        $log->update([
+            'status' => $request->status,
+        ]);
+
+        // dd($log);
+
+        return redirect()->route('rekapguru')->with('success', 'Status presensi berhasil diperbarui.');
     }
 }

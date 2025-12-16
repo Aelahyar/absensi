@@ -4,13 +4,10 @@
 <div class="page-heading">
     <div class="page-title">
         <div class="row">
-            <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>
-                    Presensi Guru - Hari {{ ucfirst($hariIni) }}</h3>
-                {{-- <p class="text-subtitle text-muted">A group for input to display information in before or after input. --}}
-                </p>
+            <div class="col-12 col-md-8 order-md-1 order-last">
+                <h3>Presensi Guru - Hari {{ ucfirst($hariIni) }}, {{($tgl_absensi)}}</h3>
             </div>
-            <div class="col-12 col-md-6 order-md-2 order-first">
+            <div class="col-12 col-md-4 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ Route('dashboarduser') }}">Dashboard</a></li>
@@ -61,16 +58,17 @@
                                                 <tr>
                                                     <td class="text-center">{{ $mengajar->jamke }}</td>
                                                     <td class="text-center">{{ $mengajar->jam_mengajar }}</td>
-                                                    <td class="text-center">{{ $mengajar->guru->nama_guru ?? '-' }}</td>
-                                                    <td class="text-center">{{ $mengajar->mapel->mapel ?? '-' }}</td>
+                                                    <td class="text-start">{{ $mengajar->guru->nama_guru ?? '-' }}</td>
+                                                    <td class="text-start">{{ $mengajar->mapel->mapel ?? '-' }}</td>
                                                     <td class="text-center">
                                                         @if($sudahAbsen)
                                                             <span class="badge bg-success">Sudah Absen</span>
                                                         @else
-                                                            <select name="absen[{{ $mengajar->id_mengajar }}]" class="form-select  absen-select" required>
+                                                            <select name="absen[{{ $mengajar->id_mengajar }}]" class="form-select text-center absen-select" required>
                                                                 <option value="hadir">Hadir</option>
-                                                                <option value="izin">Izin</option>
-                                                                <option value="alpha">Alpha</option>
+                                                                <option value="izinD">Izin D. Tugas</option>
+                                                                <option value="izinT">Izin T. Tugas</option>
+                                                                <option value="alpa">Alpa</option>
                                                             </select>
                                                         @endif
                                                     </td>

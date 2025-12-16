@@ -23,6 +23,7 @@
                             <h5 class="card-title">
                                 <div class="col-sm-12 d-flex justify-content-between">
                                     Daftar Mata Pelajaran
+                                    <h3 style="display: none; text-align: center;" id="judul-halaman">Data Mata Pelajaran MTs MA Al-Anwar</h3>
                                     <button type="button" class="btn btn-outline-success rounded-pill" data-bs-toggle="modal" data-bs-target="#tambahMapel">
                                         <strong>Add Data</strong>
                                     </button>

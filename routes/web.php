@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DashboardUserController;
+use App\Http\Controllers\RekapController;
 use App\Http\Controllers\TahunAjaranController;
 use App\Http\Controllers\AdminAuthController;
 
@@ -62,6 +63,7 @@ Route::middleware(['auth:user'])->group(function(){
     // Route Rekap Presensi
     Route::controller(App\Http\Controllers\RekapController::class)->group(function(){
         Route::get('/rekapguru', 'rekap')->name('rekapguru');
+        Route::put('/rekap/update/{id}', 'update')->name('rekap.update');
     });
 });
 

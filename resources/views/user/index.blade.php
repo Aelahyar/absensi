@@ -29,8 +29,6 @@
                             <span>
                                 Jl. Raya Cangkringrandu Perak Jombang, CANGKRINGRANDU, Kec. Perak, Kab. Jombang, Jawa Timur
                             </span>
-                            <br>
-                            <p>Email : mtsinsanikreasi@gmail.com Telp.081234567890</p>
                         </center>
                     </div>
                 </div>

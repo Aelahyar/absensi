@@ -23,6 +23,7 @@
                             <h5 class="card-title">
                                 <div class="col-sm-12 d-flex justify-content-between">
                                     Data Kelas
+                                    <h3 style="display: none; text-align: center;" id="judul-halaman">Data kelas MTs MA Al-Anwar</h3>
                                     <button href="{{ route('kelasadmin.store') }}" type="button"
                                         class="btn btn-outline-success rounded-pill" data-bs-toggle="modal"
                                         data-bs-target="#inlineForm">

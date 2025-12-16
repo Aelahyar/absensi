@@ -107,7 +107,7 @@
                     class="sidebar-item {{ Route::is('rekapsiswa*', 'rekapguru*') ? 'active' : '' }}  has-sub">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-clipboard2-check-fill"></i>
-                        <span>Rekap Presensi</span>
+                        <span>Rekap Absensi</span>
                     </a>
                     <ul class="submenu ">
                         <li class="submenu-item {{ Route::is('rekapsiswa*') ? 'active' : '' }} ">

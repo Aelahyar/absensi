@@ -23,7 +23,8 @@
                         <div class="card-header">
                             <h5 class="card-title">
                                 <div class="col-sm-12 d-flex justify-content-between">
-                                    Rekapitulasi Absensi Guru (Tidak Hadir)
+                                    Rekapitulasi Absensi Guru
+                                <h3 style="display: none; text-align: center;" id="judul-halaman">Rekapitulasi Absensi Guru MTs MA Al-Anwar</h3>
                                 </div>
                             </h5>
                         </div>
@@ -57,27 +58,75 @@
                                                 <th class="text-center">Mata Pelajaran</th>
                                                 <th class="text-center">Status</th>
                                                 <th class="text-center">Tanggal</th>
+                                                <th scope="col" class="text-center">AKSI</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @forelse ($rekapAbsensi as $key => $absen)
                                                 <tr class="text-center">
                                                     <td>{{ $key + 1 }}</td>
-                                                    <td>{{ $absen->mengajar->guru->nama_guru ?? '-' }}</td>
+                                                    <td class="text-start">{{ $absen->mengajar->guru->nama_guru ?? '-' }}</td>
                                                     <td>{{ $absen->mengajar->jamke ?? '-' }}</td>
                                                     <td>{{ $absen->mengajar->kelas->nama_kelas ?? '-' }}</td>
-                                                    <td>{{ $absen->mengajar->mapel->mapel ?? '-' }}</td>
-                                                    <td>
-                                                        @if($absen->status == 'hadir')
-                                                            <span class="badge bg-success">Hadir</span>
-                                                        @elseif($absen->status == 'izin')
-                                                            <span class="badge bg-warning">Izin</span>
+                                                    <td class="text-start">{{ $absen->mengajar->mapel->mapel ?? '-' }}</td>
+                                                    <td class="text-start">
+                                                        @if($absen->status == 'izinD')
+                                                            <span class="badge bg-info">Izin D. Tugas</span>
+                                                        @elseif($absen->status == 'izinT')
+                                                            <span class="badge bg-warning">Izin T. Tugas</span>
                                                         @else
-                                                            <span class="badge bg-danger">Alpha</span>
+                                                            <span class="badge bg-danger">Alpa</span>
                                                         @endif
                                                     </td>
                                                     <td>{{ \Carbon\Carbon::parse($absen->tanggal)->format('d-m-Y') }}</td>
+                                                    <td class="text-center">
+                                                        <div class="d-flex justify-content-center align-items-center gap-1">
+                                                            {{-- Tombol Edit --}}
+                                                            <button class="btn btn-link p-0" data-bs-toggle="modal" data-bs-target="#editKelas{{ $absen->id }}">
+                                                                <i class="bi bi-pencil-square text-success fs-5"></i>
+                                                            </button>
+                                                        </div>
+                                                    </td>
                                                 </tr>
+
+                                                <!-- Modal Edit -->
+                                                <div class="modal fade text-left modal-borderless"
+                                                    id="editKelas{{ $absen->id }}"
+                                                    tabindex="-1"
+                                                    role="dialog"
+                                                    aria-labelledby="editModalLabel{{ $absen->id }}"
+                                                    aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                                                        <div class="modal-content">
+                                                            <form method="POST" action="{{ route('rekap.update', $absen->id) }}">
+                                                                @csrf
+                                                                @method('PUT')
+                                                                <div class="modal-header bg-primary">
+                                                                    <h4 class="modal-title white" id="editModalLabel{{ $absen->id }}">Edit Presensi</h4>
+                                                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                                        <i data-feather="x"></i>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="form-group">
+                                                                        <label><strong>Status</strong></label>
+                                                                        <select name="status" class="form-control" required>
+                                                                            <option value="izinD" {{ $absen->status == 'izinD' ? 'selected' : '' }}>Izin D. Tugas</option>
+                                                                            <option value="izinT" {{ $absen->status == 'izinT' ? 'selected' : '' }}>Izin T. Tugas</option>
+                                                                            <option value="alpa"  {{ $absen->status == 'alpa'  ? 'selected' : '' }}>Alpa</option>
+                                                                            <option value="hadir" {{ $absen->status == 'hadir' ? 'selected' : '' }}>Hadir</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
+                                                                    <button type="submit" class="btn btn-warning ms-1">Simpan</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                             @empty
                                                 <tr>
                                                     <td colspan="7" class="text-center">Tidak ada data absensi</td>

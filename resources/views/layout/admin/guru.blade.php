@@ -24,6 +24,7 @@
                             <h5 class="card-title">
                                 <div class="col-sm-12 d-flex justify-content-between">
                                     Data Guru
+                                    <h3 style="display: none; text-align: center;" id="judul-halaman">Data Guru MTs MA Al-Anwar</h3>
                                     <button type="button"
                                         class="btn btn-outline-success rounded-pill"
                                         data-bs-toggle="modal"

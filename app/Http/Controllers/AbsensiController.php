@@ -17,11 +17,13 @@ class AbsensiController extends Controller
     // Absensi Siswa
     public function index(Request $request, $kelasId)
     {
-
         $hariIni = Carbon::now()->locale('id')->isoFormat('dddd');
-        // $kelasId = $request->get('kelas');
-        // dd($kelasId);
-        $tgl_absen = now()->toDateString();
+
+        // format tampilan
+        $tgl_absen_display = now()->format('d/m/Y');
+
+        // format untuk query database
+        $tgl_absen = now()->format('Y-m-d');
 
         $siswas = Siswa::where('id_mkelas', $kelasId)->get();
 
@@ -29,22 +31,22 @@ class AbsensiController extends Controller
             return back()->with('warning', 'Tidak ada siswa ditemukan di kelas ini.');
         }
 
-        return view('layout.user.absensi', compact('siswas', 'tgl_absen', 'hariIni'));
+        return view('layout.user.absensi', compact('siswas', 'tgl_absen', 'tgl_absen_display', 'hariIni'));
     }
+
 
     public function store(Request $request)
     {
+        // Ubah ke format Y-m-d sebelum simpan
         $tgl_absen = $request->input('tgl_absen');
         $data = $request->input('absen');
-
-        // dd($request->all());
 
         foreach ($request->input('id_siswa') as $idSiswa) {
             $keterangan = $request->input("keterangan.$idSiswa");
 
             LogAbsensi::create([
                 'id_siswa' => $idSiswa,
-                'tgl_absen' => $request->input('tgl_absen'),
+                'tgl_absen' => $request->input('tgl_absen'), // <- pakai hasil konversi
                 'keterangan' => $keterangan,
             ]);
         }
@@ -52,11 +54,13 @@ class AbsensiController extends Controller
         return redirect()->back()->with('success', 'Absensi berhasil disimpan!');
     }
 
+
     // Absensi Guru
 
     public function indexguru()
     {
         $hariIni = Carbon::now()->locale('id')->isoFormat('dddd'); // Misal: 'Senin', 'Selasa'
+        $tgl_absensi = now()->format('d/m/Y');
 
         $mengajars = JadwalAjar::with(['guru', 'mapel', 'kelas'])
             ->where('hari', $hariIni)
@@ -68,7 +72,7 @@ class AbsensiController extends Controller
 
             // dd($mengajars);
 
-        return view('layout.user.absensiguru', compact('mengajars', 'hariIni'));
+        return view('layout.user.absensiguru', compact('mengajars', 'tgl_absensi', 'hariIni'));
     }
 
 

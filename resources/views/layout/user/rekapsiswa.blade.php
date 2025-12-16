@@ -23,7 +23,8 @@
                         <div class="card-header">
                             <h5 class="card-title">
                                 <div class="col-sm-12 d-flex justify-content-between">
-                                    Rekapitulasi Absensi Siswa (Tidak Hadir)
+                                    Rekapitulasi Absensi Siswa
+                                <h3 style="display: none; text-align: center;" id="judul-halaman">Rekapitulasi Absensi Siswa MTs MA Al-Anwar</h3>
                                 </div>
                             </h5>
                         </div>
@@ -50,10 +51,11 @@
                                     <table id="table1" class="display table-striped" style="width:100%">
                                         <thead>
                                             <tr>
+                                                <th class="text-center">No</th>
                                                 <th class="text-center">Kelas</th>
                                                 <th class="text-center">Nama Siswa</th>
                                                 <th class="text-center">Jenis Kelamin</th>
-                                                <th class="text-center">Pondok Non Pondok</th>
+                                                <th class="text-center">Domisili</th>
                                                 <th class="text-center">Tanggal</th>
                                                 <th class="text-center">Keterangan</th>
                                             </tr>
@@ -61,16 +63,16 @@
                                         <tbody>
                                             @foreach($rekap as $item)
                                                 <tr>
+                                                    <td class="text-center">{{ $loop->iteration }}</td>
                                                     <td>{{ $item->siswa->kelas->nama_kelas ?? 'Tanpa Kelas' }}</td>
-                                                    <td>{{ $item->siswa->nama_siswa ?? '-' }}</td>
-                                                    <td>{{ $item->siswa->jk }}</td>
-                                                    <td>{{ $item->siswa->pndk }}</td>
-                                                    <td>{{ \Carbon\Carbon::parse($item->tgl_absen)->format('d-m-Y') }}</td>
-                                                    <td>{{ $item->keterangan }}</td>
+                                                    <td class="text-start">{{ $item->siswa->nama_siswa ?? '-' }}</td>
+                                                    <td class="text-start">{{ $item->siswa->jk }}</td>
+                                                    <td class="text-start">{{ $item->siswa->pndk }}</td>
+                                                    <td class="text-center">{{ \Carbon\Carbon::parse($item->tgl_absen)->format('d-m-Y') }}</td>
+                                                    <td class="text-center">{{ $item->keterangan }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
-
                                     </table>
                                 </div>
                             </div>

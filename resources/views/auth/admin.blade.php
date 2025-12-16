@@ -3,10 +3,11 @@
     <form method="POST" action="/admin/login" class="login100-form validate-form">
         @csrf
         <span class="login100-form-title p-b-30">
-            <img src="{{ asset('assets/img/mts.png') }}" width="150">
+            <img src="{{ asset('assets/img/logoMM.png') }}" width="200">
         </span>
-        <span class="login100-form-title p-b-26">
-            MTs AL-ANWAR JOMBANG
+        <span class="login100-form-title p-b-14">
+            <div style="font-size: 33px; font-weight: bold;">MTs MA</div>
+            <div style="font-size: 27px;">Al-Anwar Jombang</div>
         </span>
 
         {{-- @php
